@@ -1,0 +1,12 @@
+@import '../../sassStyles/variables';
+
+.nav-container {
+    height: 100%;
+    width: $navbar-width;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: $dark-gray;
+    color: $white;
+}
