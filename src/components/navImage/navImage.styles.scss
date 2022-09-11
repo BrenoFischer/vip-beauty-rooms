@@ -1,0 +1,31 @@
+@import '../../sassStyles/variables';
+
+.image-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: calc($list-items-margin/2) 0;
+    height: calc($list-items-padding*2 + $list-items-line-height);
+
+    img {
+        width: 100%;
+        max-width: $img-width;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.special-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: calc($list-items-margin + $list-items-line-height/2) 0;
+    height: calc($list-items-padding*2 + $list-items-font-size);
+
+    img {
+        width: 100%;
+        max-width: $img-width;
+        object-fit: cover;
+        object-position: center;
+    }
+}

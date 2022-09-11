@@ -1,0 +1,14 @@
+@import '../../sassStyles/variables';
+
+.header-container {
+    height: $header-height;
+    text-align: center;
+}
+
+.header-title {
+    font-family: 'Allura', sans-serif;
+    font-size: 4.5rem;
+    letter-spacing: 0.5rem;
+    align-self: center;
+    color: $primary-color;
+}
