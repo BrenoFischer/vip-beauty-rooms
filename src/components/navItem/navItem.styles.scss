@@ -1,0 +1,64 @@
+@import '../../sassStyles/variables';
+
+.nav__item {
+    width: 100%;
+    height: $img-height;
+    margin: $list-items-margin 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-title-container {
+        border-right: 2px solid $dark-gray;
+        border-bottom: 2px solid $dark-gray;
+        border-top: 2px solid $dark-gray;
+        background-color: $primary-color;
+        width: $list-items-width;
+        height: $list-items-height;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    &-title {
+        // color: $white;
+        font-family: 'Lato', sans-serif;
+        font-weight: 400;
+        font-size: $list-items-font-size;
+        line-height: $list-items-line-height;
+        letter-spacing: 0.3rem;
+        text-transform: uppercase;
+        text-align: center;  
+    }
+
+    &-content-container {
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    &-image {
+        width: 100%;
+        max-width: $img-width;
+        object-fit: cover;
+        object-position: center;
+        cursor: pointer;
+    }
+
+    &-details {
+        width: 100%;
+        max-width: $img-width;
+        height: $list-items-height;
+        border: 2px solid $dark-gray;
+        text-align: center;
+        line-height: 3.5rem;
+
+        p {
+            color: $dark-gray;
+            font-size: 1.7rem;
+            font-family: 'Lato', sans-serif;
+        }
+    }
+}
