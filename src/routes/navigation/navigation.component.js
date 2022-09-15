@@ -12,6 +12,7 @@ function Navigation() {
   return (
     <>
       <nav className='nav'>
+        <h1 className='nav__title'>Our Services</h1>
         <ul className='nav__list'>
           <NavItem img={ManicurePhoto} alt='manicure photo' title='Manicure'>
             <p>3 week manicure</p>
