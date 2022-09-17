@@ -6,6 +6,7 @@ import Header from '../../components/header/header.component';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import './home.styles.scss';
+import Footer from '../../components/footer/footer.component';
 
 function Home() {
   const servicesRef = useRef(null);
@@ -36,6 +37,7 @@ function Home() {
       </div>
       <div ref={servicesRef}></div>
       <Navigation ref={servicesRef} />
+      <Footer />
     </>
   );
 }
