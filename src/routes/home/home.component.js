@@ -36,7 +36,7 @@ function Home() {
         />
       </div>
       <div ref={servicesRef}></div>
-      <Navigation ref={servicesRef} />
+      <Navigation />
       <Footer />
     </>
   );
