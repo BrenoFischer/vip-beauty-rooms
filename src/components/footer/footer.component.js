@@ -5,12 +5,20 @@ import CallIcon from '@mui/icons-material/Call';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import PlaceIcon from '@mui/icons-material/Place';
 
-const FooterItem = ({ title, icon }) => {
+const FooterItem = ({ title, icon, anchor=null }) => {
     return(
-    <div className='footer-item'>
-        {icon}
-        <h4 className='footer-item__title'>{title}</h4>
-    </div>
+        anchor == null ?
+            <div className='footer-item'>
+                {icon}
+                <h4 className='footer-item__title'>{title}</h4>
+            </div>
+        :
+            <a href={anchor} target="_blank">
+                <div className='footer-item'>
+                    {icon}
+                    <h4 className='footer-item__title'>{title}</h4>
+                </div>
+            </a>
     );
 }
 
@@ -42,10 +50,12 @@ const Footer = () => {
                         <FooterItem 
                             title="@vipbeautyrooms.limerick"
                             icon={<InstagramIcon sx={iconStyle}/>}
+                            anchor='https://www.instagram.com/vipbeautyrooms.limerick/'
                         />
                         <FooterItem 
                             title="Vip Beauty Rooms"
                             icon={<FacebookIcon sx={iconStyle}/>}
+                            anchor='https://www.facebook.com/profile.php?id=100085425011126'
                         />
                     </div>
                 </div>
