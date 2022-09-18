@@ -17,7 +17,7 @@ const FooterItem = ({ title, icon }) => {
 const Footer = () => {
     const iconStyle = {
         color: '#f1997e',
-        fontSize: "2.5rem",
+        fontSize: "3rem",
     };
 
     return(
@@ -26,26 +26,28 @@ const Footer = () => {
                 <h3 className='footer__logo'>Vip Beauty Rooms</h3>
             </div>
             <div className='footer__section-container'>
-                <h3 className='footer__section-title'>Book an appoinment</h3>
-                <div className='footer__section-double'>
-                    <FooterItem 
-                        title="61 Henry Street Limerick"
-                        icon={<PlaceIcon sx={iconStyle}/>}
-                    />
-                    <FooterItem 
-                        title="(87) 186 7306"
-                        icon={<CallIcon sx={iconStyle}/>}
-                    />
-                </div>
-                <div className='footer__section-double'>
-                    <FooterItem 
-                        title="@vipbeautyrooms.limerick"
-                        icon={<InstagramIcon sx={iconStyle}/>}
-                    />
-                    <FooterItem 
-                        title="Vip Beauty Rooms"
-                        icon={<FacebookIcon sx={iconStyle}/>}
-                    />
+                <h3 className='footer__section-title'>Contact us</h3>
+                <div className='footer__section-links'>
+                    <div className='footer__section-double'>
+                        <FooterItem 
+                            title="61 Henry Street Limerick"
+                            icon={<PlaceIcon sx={iconStyle}/>}
+                        />
+                        <FooterItem 
+                            title="(87) 186 7306"
+                            icon={<CallIcon sx={iconStyle}/>}
+                        />
+                    </div>
+                    <div className='footer__section-double'>
+                        <FooterItem 
+                            title="@vipbeautyrooms.limerick"
+                            icon={<InstagramIcon sx={iconStyle}/>}
+                        />
+                        <FooterItem 
+                            title="Vip Beauty Rooms"
+                            icon={<FacebookIcon sx={iconStyle}/>}
+                        />
+                    </div>
                 </div>
 
             </div>

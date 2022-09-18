@@ -1,13 +1,11 @@
 @import '../../sassStyles/variables';
 
 .footer {
-    padding: 4rem;
     width: 100%;
     height: $footer-height;
     background-color: $primary-color;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 -10px 15px -3px rgb(0 0 0 / 0.1), 0 -4px 6px -4px rgb(0 0 0 / 0.1);
 
     &__logo-container {
         margin-bottom: 4rem;
@@ -20,19 +18,29 @@
         font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 1rem;
+        position: absolute;
+        top: 3rem;
+        left: 3rem;
     }
 
     &__section-container {
-        width: 100%;
+        position: absolute;
+        top: 45%;
+        left: 3rem;
+    }
+
+    &__section-links {
         display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        // align-items: center;
+        gap: 15rem;
+    }
+
+    &__section-double {
+        margin-top: 1.6rem;  
     }
 
     &__section-title {
         color: #f1997e;
-        font-size: 2rem;
+        font-size: 3rem;
         font-family: "Montserrat", "sans-serif";
         letter-spacing: 0.2rem;
     }
@@ -47,7 +55,7 @@
         color: #fff;
         font-family: "Montserrat", "sans-serid";
         font-weight: 400;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         margin-left: 1rem;
     }
 }
