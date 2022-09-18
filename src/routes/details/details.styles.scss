@@ -1,0 +1,50 @@
+@import '../../sassStyles/variables';
+
+.details {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10rem 0;
+
+    &__item {
+        width: $details-item-width;
+        background-color: $light-gray;
+    
+        &-image {
+            width: 100%;
+            max-width: $details-item-width;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        &-title-container {
+            width: 80%;
+            border-bottom: 3px solid $primary-color;
+            margin: 2rem 1rem;
+            padding: 1.2rem 0;
+        }
+
+        &-title {
+            font-family: 'Montserrat', 'Lato', sans-serif;
+            font-weight: 500;
+            font-size: 3rem;
+            line-height: 1rem;
+            letter-spacing: 0.2rem;
+        }
+
+        p {
+            color: $dark-gray;
+            font-size: 1.5rem;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0.5rem 1rem;
+
+            &:last-child {
+                margin-bottom: 2.5rem;
+            }
+        }
+
+        &-button-container {
+            margin: 3rem 1rem;
+        }
+    }
+}

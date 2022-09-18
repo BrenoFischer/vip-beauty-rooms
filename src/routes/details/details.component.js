@@ -1,19 +1,36 @@
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
 import Header from '../../components/header/header.component';
+import Footer from '../../components/footer/footer.component';
 
 import './details.styles.scss';
+import CustomButton from '../../components/button/button.component';
 
 const Details = () => {
     const location = useLocation();
-    const { service, img, details } = location.state;
+    const { service, img, alt, details } = location.state;
 
     return (
-    <div>
+    <>
         <Header />
-        <h1>{service}</h1>
-        <p>{details}</p>
-        <img src={img}/>
-    </div>
+        <div className='details'>
+            <div className='details__item'>
+                <img className='details__item-image' src={img} alt={alt} />
+                <div className='details__item-title-container'>
+                    <h1 className='details__item-title'>{service}</h1>
+                </div>
+                {details.map((detailText) => {
+                    return(<p>{detailText}</p>);
+                })}
+                <div className='details__item-button-container'>
+                    <Link to='/'>
+                        <CustomButton buttonText="Back to services" />
+                    </Link>
+                </div>
+            </div>
+        </div>
+        <Footer />
+    </>
     );
 }
 

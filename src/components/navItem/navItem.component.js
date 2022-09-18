@@ -7,10 +7,9 @@ function NavItem({img, alt, title, children, details}) {
   const detailsState = {
     service: title,
     img: img,
+    alt: alt,
     details: details,
   };
-
-  console.log()
 
   return (
     <li className='nav__item'>
