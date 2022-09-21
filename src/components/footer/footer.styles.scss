@@ -1,4 +1,5 @@
 @import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
 
 .footer {
     width: 100%;
@@ -32,10 +33,30 @@
     &__section-links {
         display: flex;
         gap: 15rem;
+
+        @include respond(tab-port) {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        @include respond(phone) {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
     }
 
     &__section-double {
-        margin-top: 1.6rem;  
+        margin-top: 1.6rem;
+
+        @include respond(tab-port) {
+            margin-top: 0;
+        }
+
+        @include respond(phone) {
+            margin-top: 0;
+        }
     }
 
     &__section-title {
@@ -44,12 +65,50 @@
         font-family: "Montserrat", "sans-serif";
         letter-spacing: 0.2rem;
     }
+
+    &__schedule-container {
+        position: absolute;
+        top: 3rem;
+        right: 5%;
+
+        @include respond(tab-port) {
+            top: 30%;
+        }
+
+        @include respond(phone) {
+            top: 30%;
+        }
+    }
+
+    &__schedule-title {
+        color: #f1997e;
+        font-size: 2.5rem;
+        font-family: "Montserrat", "sans-serif";
+        letter-spacing: 0.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    &__schedule-list {
+        list-style-type: none;
+    }
+
+    &__schedule-item {
+        color: #fff;
+        font-family: "Montserrat", "sans-serid";
+        font-weight: 400;
+        font-size: 1.8rem;
+        margin-top: 1rem;
+    }
 }
 
 .footer-item {
     display: flex;
     align-items: center;
     margin-top: 0.5rem;
+
+    @include respond(phone) {
+        margin-top: 0;
+    }
 
     &__title {
         color: #fff;

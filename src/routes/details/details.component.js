@@ -20,7 +20,8 @@ const Details = () => {
                     <h1 className='details__item-title'>{service}</h1>
                 </div>
                 {details.map((detailText) => {
-                    return(<p>{detailText}</p>);
+                    if(detailText === '_') return (<p>&nbsp;</p>);
+                    return (<p>{detailText}</p>);
                 })}
                 <div className='details__item-button-container'>
                     <Link to='/'>

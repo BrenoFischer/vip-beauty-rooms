@@ -59,7 +59,16 @@ const Footer = () => {
                         />
                     </div>
                 </div>
-
+            </div>
+            <div className='footer__schedule-container'>
+                <h3 className='footer__schedule-title'>Opening hours</h3>
+                <ul className='footer__schedule-list'>
+                    <li className='footer__schedule-item'>Tuesday - 9am to 6pm</li>
+                    <li className='footer__schedule-item'>Wednesday - 9am to 6pm</li>
+                    <li className='footer__schedule-item'>Thursday - 9am to 6pm</li>
+                    <li className='footer__schedule-item'>Friday - 9am to 7pm</li>
+                    <li className='footer__schedule-item'>Saturday - 9am to 5pm</li>
+                </ul>
             </div>
         </footer>
     );
