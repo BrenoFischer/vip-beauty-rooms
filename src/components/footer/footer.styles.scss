@@ -76,7 +76,7 @@
         }
 
         @include respond(phone) {
-            top: 30%;
+            top: 40%;
         }
     }
 
@@ -98,6 +98,10 @@
         font-weight: 400;
         font-size: 1.8rem;
         margin-top: 1rem;
+
+        @include respond(phone) {
+            font-size: 1.4rem;
+        }
     }
 }
 
@@ -116,5 +120,9 @@
         font-weight: 400;
         font-size: 1.8rem;
         margin-left: 1rem;
+
+        @include respond(phone) {
+            font-size: 1.5rem;
+        }
     }
 }
