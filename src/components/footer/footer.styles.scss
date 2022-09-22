@@ -26,7 +26,7 @@
 
     &__section-container {
         position: absolute;
-        top: 40%;
+        top: 35%;
         left: 3rem;
     }
 
@@ -64,20 +64,13 @@
         font-size: 3rem;
         font-family: "Montserrat", "sans-serif";
         letter-spacing: 0.2rem;
+        margin-bottom: 1.5rem;
     }
 
     &__schedule-container {
         position: absolute;
-        top: 3rem;
+        top: 35%;
         right: 5%;
-
-        @include respond(tab-port) {
-            top: 30%;
-        }
-
-        @include respond(phone) {
-            top: 40%;
-        }
     }
 
     &__schedule-title {
@@ -112,6 +105,7 @@
 
     @include respond(phone) {
         margin-top: 0;
+        margin-bottom: 0.5rem;
     }
 
     &__title {
