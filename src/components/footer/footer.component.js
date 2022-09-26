@@ -13,7 +13,7 @@ const FooterItem = ({ title, icon, anchor=null }) => {
                 <h4 className='footer-item__title'>{title}</h4>
             </div>
         :
-            <a href={anchor} target="_blank">
+            <a href={anchor} target="_blank" rel="noreferrer">
                 <div className='footer-item'>
                     {icon}
                     <h4 className='footer-item__title'>{title}</h4>

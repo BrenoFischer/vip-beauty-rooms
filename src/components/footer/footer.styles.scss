@@ -26,7 +26,7 @@
 
     &__section-container {
         position: absolute;
-        top: 35%;
+        top: 30%;
         left: 3rem;
     }
 
@@ -69,8 +69,12 @@
 
     &__schedule-container {
         position: absolute;
-        top: 35%;
-        right: 5%;
+        top: 30%;
+        right: 8%;
+
+        @include respond(tab-land) {
+            right: 5%;
+        }
     }
 
     &__schedule-title {
