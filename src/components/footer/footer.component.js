@@ -42,7 +42,7 @@ const Footer = () => {
                             icon={<PlaceIcon sx={iconStyle}/>}
                         />
                         <FooterItem 
-                            title="(87) 186 7306"
+                            title="(87) 750 8097"
                             icon={<CallIcon sx={iconStyle}/>}
                         />
                     </div>
