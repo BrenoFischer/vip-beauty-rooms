@@ -31,14 +31,14 @@ const Footer = () => {
     return(
         <footer className='footer'>
             <div className='footer__logo-container'>
-                <h3 className='footer__logo'>Vip Beauty Rooms</h3>
+                <h3 className='footer__logo'>Unique Beauty Limerick</h3>
             </div>
             <div className='footer__section-container'>
                 <h3 className='footer__section-title'>Contact us</h3>
                 <div className='footer__section-links'>
                     <div className='footer__section-double'>
                         <FooterItem 
-                            title="61 Henry Street Limerick"
+                            title="10 Thomas Street Limerick"
                             icon={<PlaceIcon sx={iconStyle}/>}
                         />
                         <FooterItem 
@@ -48,12 +48,12 @@ const Footer = () => {
                     </div>
                     <div className='footer__section-double'>
                         <FooterItem 
-                            title="@vipbeautyrooms.limerick"
+                            title="@uniquebeauty.limerick"
                             icon={<InstagramIcon sx={iconStyle}/>}
                             anchor='https://www.instagram.com/vipbeautyrooms.limerick/'
                         />
                         <FooterItem 
-                            title="Vip Beauty Rooms"
+                            title="Unique Beauty Limerick"
                             icon={<FacebookIcon sx={iconStyle}/>}
                             anchor='https://www.facebook.com/profile.php?id=100085425011126'
                         />
