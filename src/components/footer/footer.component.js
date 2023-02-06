@@ -1,7 +1,6 @@
 import './footer.styles.scss';
 
 import InstagramIcon from '@mui/icons-material/Instagram';
-import CallIcon from '@mui/icons-material/Call';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import PlaceIcon from '@mui/icons-material/Place';
 
@@ -33,42 +32,42 @@ const Footer = () => {
             <div className='footer__logo-container'>
                 <h3 className='footer__logo'>Unique Beauty Limerick</h3>
             </div>
-            <div className='footer__section-container'>
-                <h3 className='footer__section-title'>Contact us</h3>
-                <div className='footer__section-links'>
-                    <div className='footer__section-double'>
-                        <FooterItem 
-                            title="10 Thomas Street Limerick"
-                            icon={<PlaceIcon sx={iconStyle}/>}
-                        />
-                        <FooterItem 
-                            title="(87) 750 8097"
-                            icon={<CallIcon sx={iconStyle}/>}
-                        />
-                    </div>
-                    <div className='footer__section-double'>
-                        <FooterItem 
-                            title="@uniquebeauty.limerick"
-                            icon={<InstagramIcon sx={iconStyle}/>}
-                            anchor='https://www.instagram.com/vipbeautyrooms.limerick/'
-                        />
-                        <FooterItem 
-                            title="Unique Beauty Limerick"
-                            icon={<FacebookIcon sx={iconStyle}/>}
-                            anchor='https://www.facebook.com/profile.php?id=100085425011126'
-                        />
+            <div className='footer__wrapper'>
+                <div className='footer__section-container'>
+                    <h3 className='footer__section-title'>Contact us</h3>
+                    <div className='footer__section-links'>
+                        <div className='footer__section-double'>
+                            <FooterItem 
+                                title="10 Thomas Street Limerick"
+                                icon={<PlaceIcon sx={iconStyle}/>}
+                                anchor='https://goo.gl/maps/tfn96PjYuBUuJuUk7'
+                            />
+                            <FooterItem 
+                                title="@uniquebeautylimerick"
+                                icon={<InstagramIcon sx={iconStyle}/>}
+                                anchor='https://www.instagram.com/uniquebeautylimerick/'
+                            />
+                        </div>
+                        <div className='footer__section-double'>
+                            <FooterItem 
+                                title="Unique Beauty Limerick"
+                                icon={<FacebookIcon sx={iconStyle}/>}
+                                anchor='https://www.facebook.com/profile.php?id=100089288214240'
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='footer__schedule-container'>
-                <h3 className='footer__schedule-title'>Opening hours</h3>
-                <ul className='footer__schedule-list'>
-                    <li className='footer__schedule-item'>Tuesday - 9am to 6pm</li>
-                    <li className='footer__schedule-item'>Wednesday - 9am to 6pm</li>
-                    <li className='footer__schedule-item'>Thursday - 9am to 6pm</li>
-                    <li className='footer__schedule-item'>Friday - 9am to 7pm</li>
-                    <li className='footer__schedule-item'>Saturday - 9am to 5pm</li>
-                </ul>
+                <div className='footer__schedule-container'>
+                    <h3 className='footer__schedule-title'>Opening hours</h3>
+                    <ul className='footer__schedule-list'>
+                        <li className='footer__schedule-item'>Monday - 10am to 6pm</li>
+                        <li className='footer__schedule-item'>Tuesday - 10am to 6pm</li>
+                        <li className='footer__schedule-item'>Wednesday - 10am to 6pm</li>
+                        <li className='footer__schedule-item'>Thursday - 10am to 8pm</li>
+                        <li className='footer__schedule-item'>Friday - 10am to 8pm</li>
+                        <li className='footer__schedule-item'>Saturday - 10am to 5pm</li>
+                    </ul>
+                </div>
             </div>
         </footer>
     );
