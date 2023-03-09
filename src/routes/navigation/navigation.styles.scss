@@ -1,31 +1,34 @@
 @import '../../sassStyles/variables';
 
 .nav {
-    margin-top: 4rem;
-    width: 100%;
-    color: $dark-gray;
-    padding-left: 0;
-    text-align: center;
+    padding: 3rem;
+    background-color: $secondary-color;
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.2);
 
-    &__list {
-        width: 100%;
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    &__img {
+        max-width: 25rem;
     }
 
-    // &__images {
-    //     list-style: none;
-    //     width: 100%;
-    //     display: flex;
-    //     flex-direction: column;
-    //     align-items: center;
-    // }
+    &__links-container {
+        width: 100%;
+    }
 
-    &__title {
-        font-family: 'Allura', sans-serif;
-        font-size: 10rem;
+    &__links {
+        height: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__link {
+        text-transform: uppercase;
+        color: $white;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 2rem;
+        font-weight: 400;
+        margin-right: 5rem;
     }
 }
-

@@ -1,7 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
 
-import Navigation from '../navigation/navigation.component';
+import Services from '../services/services.component';
 import Header from '../../components/header/header.component';
+import { UserContext } from '../../context/user.context';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -10,6 +11,8 @@ import Footer from '../../components/footer/footer.component';
 
 function Home() {
   const servicesRef = useRef(null);
+  const { currentUser } = useContext(UserContext);
+  console.log(currentUser);
 
   const scrollToServices = (ref) => {
     window.scrollTo({
@@ -21,7 +24,7 @@ function Home() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className='icon-container' onClick={() => scrollToServices(servicesRef)}>
         <ExpandMoreIcon sx={{
           fontSize: '16rem',
@@ -36,7 +39,7 @@ function Home() {
         />
       </div>
       <div ref={servicesRef}></div>
-      <Navigation />
+      <Services />
       <Footer />
     </>
   );
