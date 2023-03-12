@@ -1,3 +1,7 @@
+import { useContext } from 'react';
+
+import { UserContext } from '../../context/user.context';
+
 import Service from '../../components/service/service.component';
 
 import PedicurePhoto from '../../assets/pedicure.jpg';
@@ -14,24 +18,39 @@ function Services() {
   const gelDetailsText = ['Large selection of colours available', 'Refill gel or full set gel', 'Ring to book appointment', 'Walk Inn more than welcome', '_', 'Monday to Wednesday 10am to 6pm', 'Thursday to Friday 10am to 8pm', 'Saturday 10am to 5pm'];
   const spaDetialsText = ['1/2 Day Spa Package', 'Full day Spa Package', '_', '1/2 Day Spa - €79.00', 'Full Day Spa - €120.00', '_', '1/2 Day - Gel nails + mini pedicure + 20min massage', '2 hours 10 mins - Total: €79.00', '_', 'Full Day Spa Package - Time Period 3 hours 10 mins - Cost €120.00', 'Treatment full body massage, gel nails, full pedicure, facial or hair blow dry', '_', 'Monday to Wednesday 10am to 6pm', 'Thursday to Friday 10am to 8pm', 'Saturday 10am to 5pm']
 
+  const manicureShortDetails = ['3 week manicure available!', 'Full Pedicure', 'Mini Pedicure'];
+  const masssageShortDetails = ["Relaxation Massage", "Deep Tissue Massage", "Indian Head Massage"];
+
+  const { currentUser } = useContext(UserContext);
+
   return (
     <> 
       <main className='services'>
-        <h1 className='services__title'>Our Services</h1>
+        <div>
+          <h1 className='services__title'>Our Services</h1>
+          { currentUser &&
+            <p>+</p>
+          }
+        </div>
         <ul className='services__list'>
-          <Service img={PedicurePhoto} alt='manicure' title='Manicure / Pedicure' details={manicureDetailsText}>
-            <p>3 week manicure available!</p>
-            <p>Full Pedicure</p>
-            <p>Mini Pedicure</p>
-          </Service>
+          <Service 
+            img={PedicurePhoto}
+            alt='manicure'
+            title='Manicure / Pedicure'
+            details={manicureDetailsText}
+            shortDetails={manicureShortDetails}
+          />
 
-          <Service img={MassagePhoto} alt='massage' title='Massage' details={massageDetailsText}>
-            <p>Relaxation Massage</p>
-            <p>Deep Tissue Massage</p>
-            <p>Indian Head Massage</p>
-          </Service>
+          <Service 
+            img={MassagePhoto} 
+            alt='massage' 
+            title='Massage' 
+            details={massageDetailsText}
+            shortDetails={masssageShortDetails}
+          />
 
-          <Service img={EyelashPhoto} alt='eyelash' title='Eyelash / Eyebrow' details={eyeDetailsText}>
+
+          {/* <Service img={EyelashPhoto} alt='eyelash' title='Eyelash / Eyebrow' details={eyeDetailsText}>
             <p>Eye Lash</p>
             <p>Eyebrow tint</p>
             <p>Selections of tints available!</p>  
@@ -45,7 +64,7 @@ function Services() {
           <Service img={PedicurePhoto} alt='spa package' title='Spa Package' details={spaDetialsText}>
             <p>1/2 Day Spa Package</p>
             <p>Full day Spa Package</p>
-          </Service>
+          </Service> */}
         </ul>
       </main>
     </>

@@ -3,7 +3,7 @@ import CustomButton from '../button/button.component';
 
 import './service.styles.scss';
 
-function Service({img, alt, title, children, details}) {
+function Service({img, alt, title, shortDetails, details}) {
   const detailsState = {
     service: title,
     img: img,
@@ -19,7 +19,7 @@ function Service({img, alt, title, children, details}) {
             <h3 className='service-title'>{title}</h3>
           </div>
           <div className='service-details'>
-            {children}
+            {shortDetails}
           </div>
         </div>
         <div className='service-button-container'>

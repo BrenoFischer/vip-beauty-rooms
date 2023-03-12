@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 
-import Header from '../../components/header/header.component';
 import Footer from '../../components/footer/footer.component';
 
 import './details.styles.scss';
@@ -12,7 +11,6 @@ const Details = () => {
 
     return (
     <>
-        <Header />
         <div className='details'>
             <div className='details__item'>
                 <img className='details__item-image' src={img} alt={alt} />
