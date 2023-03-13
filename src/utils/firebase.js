@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, collection, writeBatch } from 'firebase/firestore';
-
+import { getFirestore, collection, writeBatch, doc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -14,13 +14,32 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 //create the object to handle Authentication
 export const auth = getAuth();
 
 //create the object that handle firestore database
 export const db = getFirestore();
+
+//create instance to storage, able to manage images
+export const storage = getStorage(firebaseApp);
+
+
+
+//uploads a given image base on the file path given and returns the url
+export const uploadImageToStorage = async (filePath, image) => {
+  //provides an image referance on the storage, based on the file path given
+  const imageRef = ref(storage, filePath);
+
+  //upload the image based on the imageRef object - returns the snapshot of the upload result
+  const snapshot = await uploadBytes(imageRef, image);
+
+  //obtain the url of the uploaded image - this url can be used to display the image on a <img> tag, on src field
+  const url = await getDownloadURL(snapshot.ref);
+
+  return url;
+}
 
 export const addCollectionAndDocuments = async (collectionKey, objects) => {
   //gets the collection from the db, based on the key - if collection does not exists, it creates one with the key

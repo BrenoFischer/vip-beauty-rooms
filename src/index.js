@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.scss';
 import App from './App';
 import { UserProvider } from './context/user.context';
+import { ServiceProvider } from './context/service.context';
 import ScrollToTop from './utils/ScrollToTop';
 import reportWebVitals from './reportWebVitals';
 
@@ -13,7 +14,9 @@ root.render(
     <BrowserRouter>
       <ScrollToTop />
       <UserProvider>
-        <App />
+        <ServiceProvider>
+          <App />
+        </ServiceProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
