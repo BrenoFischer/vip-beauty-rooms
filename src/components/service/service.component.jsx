@@ -19,7 +19,9 @@ function Service({img, alt, title, shortDetails, details}) {
             <h3 className='service-title'>{title}</h3>
           </div>
           <div className='service-details'>
-            {shortDetails}
+            <p>
+              {shortDetails}
+            </p>
           </div>
         </div>
         <div className='service-button-container'>

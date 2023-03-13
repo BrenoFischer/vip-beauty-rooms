@@ -26,8 +26,7 @@ export const db = getFirestore();
 export const storage = getStorage(firebaseApp);
 
 
-
-//uploads a given image base on the file path given and returns the url
+//uploads a given image based on the file path given and returns the url
 export const uploadImageToStorage = async (filePath, image) => {
   //provides an image referance on the storage, based on the file path given
   const imageRef = ref(storage, filePath);

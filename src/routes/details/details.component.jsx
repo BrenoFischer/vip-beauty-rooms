@@ -17,10 +17,7 @@ const Details = () => {
                 <div className='details__item-title-container'>
                     <h1 className='details__item-title'>{service}</h1>
                 </div>
-                {details.map((detailText) => {
-                    if(detailText === '_') return (<p>&nbsp;</p>);
-                    return (<p>{detailText}</p>);
-                })}
+                <p className='details__item-text'>{details}</p>
                 <div className='details__item-button-container'>
                     <Link to='/'>
                         <CustomButton buttonText="Back to services" />
