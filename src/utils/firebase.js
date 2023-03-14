@@ -40,6 +40,12 @@ export const uploadImageToStorage = async (filePath, image) => {
   return url;
 }
 
+export const getImageFromStorage = async (filePath) => {
+  const imageRef = ref(storage, filePath);
+
+  return await getDownloadURL(imageRef);
+}
+
 export const addCollectionAndDocuments = async (collectionKey, objects) => {
   //gets the collection from the db, based on the key - if collection does not exists, it creates one with the key
   const collectionRef = collection(db, collectionKey);

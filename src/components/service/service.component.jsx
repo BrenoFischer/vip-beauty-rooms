@@ -3,11 +3,10 @@ import CustomButton from '../button/button.component';
 
 import './service.styles.scss';
 
-function Service({img, alt, title, shortDetails, details}) {
+function Service({img, title='', shortDetails='', details=''}) {
   const detailsState = {
     service: title,
     img: img,
-    alt: alt,
     details: details,
   };
 
@@ -32,7 +31,7 @@ function Service({img, alt, title, shortDetails, details}) {
       </div>
       <Link to='details' state={detailsState}>
         <div className='service-image-container'>
-          <img className='service-image' src={img} alt={alt} />
+          <img className='service-image' src={img} alt={title} />
         </div>
       </Link>
     </li>

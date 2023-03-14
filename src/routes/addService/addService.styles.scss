@@ -1,0 +1,140 @@
+@import '../../sassStyles/variables';
+
+$label-fontSize: 1rem;
+
+@mixin shrinkLabel {
+    top: $label-fontSize;
+    font-size: $label-fontSize;
+    color: $primary-color;
+    font-weight: 500;
+  }
+
+
+.add-service {
+    padding: 0 5rem;
+
+    &__description {
+        margin: 10rem 0;
+        text-align: center;
+
+        &-title {
+            display: inline-block;
+            font-family: 'Allura', sans-serif;
+            font-size: 6rem;
+            color: $secondary-color;
+            margin-bottom: 2rem;
+
+            border-bottom: 2px solid $primary-color;
+        }
+
+        &-paragraph {
+            font-size: 1.6rem;
+            line-height: 3rem;
+        }
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+
+    &__form {
+        &-title {
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 10rem;
+        }
+
+        &-fields {
+            margin-left: 3rem;
+        }
+    }
+
+
+    input[type="file"] {
+        display: none;
+    }
+
+    &__file-upload {
+        cursor: pointer;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        
+        &-icon {
+            color: $primary-color;
+            display: flex;
+            align-items: center;
+            font-size: 4rem;
+            margin-right: 1rem;
+        }
+    }
+    
+
+    &__preview-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+    }
+}
+
+
+.form__input-field {
+    position: relative;
+}
+
+.form__input {
+    background: none;
+    background-color: $white;
+    color: $secondary-color;
+    font-size: 1.4rem;
+    padding: 2.5rem 1rem 1rem .5rem;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid $secondary-color;
+    border-right: 2px solid $secondary-color;
+    margin: 25px 0;
+    resize: none;
+    transition: all .2s;
+
+    &:hover {
+        border-bottom: 2px solid $primary-color;
+        border-right: 2px solid $primary-color;
+    }
+
+    &:focus {
+        border-bottom: 2px solid $primary-color;
+        border-right: 2px solid $primary-color;
+        outline: none;
+    }
+
+    &:focus ~ .form__input-label {
+        @include shrinkLabel();
+    }
+}
+
+.form__input-label {
+    color: $secondary-color;
+    font-size: 1.4rem;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 300ms ease all;
+
+    &.shrink {
+        @include shrinkLabel();
+    }
+
+    &-ast {
+        color: $primary-color;
+        font-weight: 600;
+    }
+}
