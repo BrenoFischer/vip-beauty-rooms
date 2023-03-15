@@ -1,17 +1,18 @@
 import { useContext, useState } from 'react';
 import { v4 } from 'uuid';
 
-import { BiImageAdd } from 'react-icons/bi';
-import { IconContext } from 'react-icons';
+import { BiImageAdd, BiMinusCircle, BiMessageSquareAdd } from 'react-icons/bi';
 
 import { uploadImageToStorage } from '../../utils/firebase';
 
 import ServiceDetails from '../../components/service-details/service-details.component';
 import Service from '../../components/service/service.component';
+import Footer from '../../components/footer/footer.component';
 
 import { UserContext } from '../../context/user.context';
 
 import './addService.styles.scss';
+import CustomButton from '../../components/button/button.component';
 
 const defaultFormFields = {
     details: '',
@@ -43,6 +44,8 @@ const AddService = () => {
     const { currentUser } = useContext(UserContext);
   
     const [ imageUpload, setImageUpload ] = useState(null);
+    const [ hidePreview, setHidePreview ] = useState(false);
+    const [ hideShortPreview, setHideShortPreview ] = useState(false);
     const [ formFields, setFormFields ] = useState(defaultFormFields);
     const { details, title, short, imgUrl } = formFields;
     
@@ -74,10 +77,15 @@ const AddService = () => {
     }
 
 
+    const togglePreview = () => setHidePreview(!hidePreview);
+
+    const togglePreviewShort = () => setHideShortPreview(!hideShortPreview);
+
+
     return(
       <div className='add-service'>
         { currentUser ?
-          <>
+          <div className='add-service__container'>
             <div className='add-service__description'>
               <h2 className='add-service__description-title'>Add a new service</h2>
               <p className='add-service__description-paragraph'>Fill the fields below to add a new service.</p>
@@ -124,28 +132,59 @@ const AddService = () => {
                     value={details}
                   />
                 </div>
-                <button>Add service</button>
+                <div className='add-service__button-wrapper'>
+                  <CustomButton buttonText="Add service" />
+                </div>
               </form>
-              <div className='add-service__preview-container'>
-                <Service 
-                  img={imgUrl}
-                  title={title}
-                  shortDetails={short}
-                />
-                <ServiceDetails
-                  title={title}
-                  img={imgUrl}
-                  details={details}
-                />
+              <div className='add-service__preview'>
+                <div className='add-service__preview-wrapper'>
+                  <div className='add-service__preview-title-wrapper'>
+                    <h3 className='add-service__preview-title'>Preview from the main page</h3>
+                    <div className='add-service__preview-title-icon' onClick={togglePreviewShort}>
+                      { hideShortPreview ?
+                          <BiMessageSquareAdd />
+                        :
+                          <BiMinusCircle />
+                      }
+                    </div>
+                  </div>
+                  { !hideShortPreview &&
+                    <Service 
+                      img={imgUrl}
+                      title={title}
+                      shortDetails={short}
+                    />
+                  }
+                </div>
+                <div className='add-service__preview-wrapper'>
+                  <div className='add-service__preview-title-wrapper'>
+                    <h3 className='add-service__preview-title'>Preview when you click for more details</h3>
+                    <div className='add-service__preview-title-icon' onClick={togglePreview}>
+                      { hidePreview ?
+                          <BiMessageSquareAdd />
+                        :
+                          <BiMinusCircle />
+                      }
+                    </div>
+                  </div>
+                  { !hidePreview &&
+                    <ServiceDetails
+                      title={title}
+                      img={imgUrl}
+                      details={details}
+                    />
+                  }
+                </div>
               </div>
             </div>
-          </>
+          </div>
         :
           <div>
             <h2>Sorry, this is an area for Unique Beauty Managers</h2>
             <p>If you are a manager, please, authenticate yourself before adding a new service. You can do it by clicking on "Log In".</p>
           </div>
         }
+        <Footer />
       </div>
     );
 }

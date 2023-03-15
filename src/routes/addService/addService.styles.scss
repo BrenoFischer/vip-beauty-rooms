@@ -1,9 +1,9 @@
 @import '../../sassStyles/variables';
 
-$label-fontSize: 1rem;
+$label-fontSize: 1.2rem;
 
 @mixin shrinkLabel {
-    top: $label-fontSize;
+    top: -$label-fontSize;
     font-size: $label-fontSize;
     color: $primary-color;
     font-weight: 500;
@@ -11,7 +11,9 @@ $label-fontSize: 1rem;
 
 
 .add-service {
-    padding: 0 5rem;
+    &__container {
+        padding: 0 5rem;
+    }
 
     &__description {
         margin: 10rem 0;
@@ -61,6 +63,7 @@ $label-fontSize: 1rem;
         font-size: 2rem;
         display: flex;
         align-items: center;
+        margin-bottom: 5rem;
         
         &-icon {
             color: $primary-color;
@@ -70,20 +73,49 @@ $label-fontSize: 1rem;
             margin-right: 1rem;
         }
     }
+
+    &__button-wrapper {
+        margin-top: 7rem;
+        margin-left: 3rem;
+    }
     
 
-    &__preview-container {
+    &__preview {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        
+        // align-items: center;
+        margin-bottom: 10rem;
+
+        &-wrapper:not(:last-child) {
+            margin-bottom: 10rem;
+        }
+
+        &-title-wrapper {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+
+        &-title-icon {
+            font-size: 3rem;
+            color: $primary-color;
+            cursor: pointer;
+            margin-left: 2rem;
+            display: flex;
+        }
+
+        &-title {
+            font-size: 3rem;
+            font-weight: 400;
+        }
     }
 }
 
 
 .form__input-field {
     position: relative;
+    margin-top: 5rem;
 }
 
 .form__input {
