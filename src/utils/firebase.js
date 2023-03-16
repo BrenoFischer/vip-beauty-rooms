@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, collection, writeBatch, doc } from 'firebase/firestore';
+import { getFirestore, collection, writeBatch, doc, query, getDocs } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Your web app's Firebase configuration
@@ -46,6 +46,7 @@ export const getImageFromStorage = async (filePath) => {
   return await getDownloadURL(imageRef);
 }
 
+//receive a collection key and add/create a document to that collection. It'll add each object passed, based on its ID
 export const addCollectionAndDocuments = async (collectionKey, objects) => {
   //gets the collection from the db, based on the key - if collection does not exists, it creates one with the key
   const collectionRef = collection(db, collectionKey);
@@ -55,13 +56,24 @@ export const addCollectionAndDocuments = async (collectionKey, objects) => {
 
   objects.forEach((object) => {
     //get the document on the corresponding collection of the db, based on the title, that matches the object passed
-    const docRef = doc(collectionRef, object.title.toLowerCase());
+    const docRef = doc(collectionRef, object.id);
     //insert the object on the document from the db
     batch.set(docRef, object);
   });
 
   //commit the changes made
   await batch.commit();
+}
+
+export const getServicesAndDocuments = async () => {
+  const collectionRef = collection(db, 'services');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const services = querySnapshot.docs.map(doc => doc.data());
+  console.log(services);
+  return services
 }
 
 //authenticate with email and password given

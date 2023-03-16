@@ -1,9 +1,9 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef } from 'react';
 import { v4 } from 'uuid';
 
 import { BiImageAdd, BiMinusCircle, BiMessageSquareAdd } from 'react-icons/bi';
 
-import { uploadImageToStorage } from '../../utils/firebase';
+import { uploadImageToStorage, addCollectionAndDocuments } from '../../utils/firebase';
 
 import ServiceDetails from '../../components/service-details/service-details.component';
 import Service from '../../components/service/service.component';
@@ -18,8 +18,7 @@ const defaultFormFields = {
     details: '',
     title: '',
     short: '',
-    imgUrl: 'https://firebasestorage.googleapis.com/v0/b/unique-beauty-87701.appspot.com/o/services%2Flogo.jpg?alt=media&token=99bfc6b8-ec74-4c84-8e93-cd06722108fa',
-}
+  }
 
 
 const InputField = ({label, isTextArea=false, ...otherProps}) => (
@@ -41,22 +40,25 @@ const InputField = ({label, isTextArea=false, ...otherProps}) => (
   
 
 const AddService = () => {
+    const form = useRef();
+
     const { currentUser } = useContext(UserContext);
   
     const [ imageUpload, setImageUpload ] = useState(null);
     const [ hidePreview, setHidePreview ] = useState(false);
     const [ hideShortPreview, setHideShortPreview ] = useState(false);
+    const [ imgUrlPreview, setImgUrlPreview ] = useState('https://firebasestorage.googleapis.com/v0/b/unique-beauty-87701.appspot.com/o/services%2Flogo.jpg?alt=media&token=99bfc6b8-ec74-4c84-8e93-cd06722108fa');
     const [ formFields, setFormFields ] = useState(defaultFormFields);
-    const { details, title, short, imgUrl } = formFields;
+    const { details, title, short } = formFields;
     
   
     const uploadImage = async () => {
-      if(!imageUpload) return;
+      if(!imageUpload) return imgUrlPreview;
   
       const filePath = `services/${imageUpload.name + v4()}`;
       const url = await uploadImageToStorage(filePath, imageUpload);
   
-      console.log(url);
+      return url;
     }
   
     const handleInputChange = (event) => {
@@ -64,16 +66,36 @@ const AddService = () => {
   
       setFormFields({...formFields, [name]: value});
     }
+
+    const buildItem = (url) => (
+      {
+        id: v4(),
+        imgUrl: url,
+        title: title,
+        details: details,
+        shortDetails: short
+      }
+    );  
   
-    const addService = (event) => {
+    const addService = async (event) => {
+      console.log("iniciou")
       event.preventDefault();
-  
-      console.log(details);
+
+      const url = await uploadImage();
+      console.log("url", url);
+
+      const item = buildItem(url);
+      console.log("urel", url);
+      console.log("item",item);
+
+      await addCollectionAndDocuments('services', [item]);
+
+      setFormFields(defaultFormFields);
     }
 
     const handleImageInputChange = (event) => {
       setImageUpload(event.target.files[0]);
-      setFormFields({[event.target.name]: URL.createObjectURL(event.target.files[0])});
+      setImgUrlPreview(URL.createObjectURL(event.target.files[0]));
     }
 
 
@@ -133,7 +155,7 @@ const AddService = () => {
                   />
                 </div>
                 <div className='add-service__button-wrapper'>
-                  <CustomButton buttonText="Add service" />
+                  <CustomButton buttonText="Add service" type='submit' />
                 </div>
               </form>
               <div className='add-service__preview'>
@@ -150,9 +172,10 @@ const AddService = () => {
                   </div>
                   { !hideShortPreview &&
                     <Service 
-                      img={imgUrl}
+                      img={imgUrlPreview}
                       title={title}
                       shortDetails={short}
+                      preview={true}
                     />
                   }
                 </div>
@@ -170,8 +193,9 @@ const AddService = () => {
                   { !hidePreview &&
                     <ServiceDetails
                       title={title}
-                      img={imgUrl}
+                      img={imgUrlPreview}
                       details={details}
+                      preview={true}
                     />
                   }
                 </div>

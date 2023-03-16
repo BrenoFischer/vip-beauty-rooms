@@ -1,8 +1,9 @@
 import { Button } from "@mui/material";
 
-const CustomButton = ({ buttonText }) => {
+const CustomButton = ({ buttonText, type="text" }) => {
     return(
         <Button 
+            type={type}
             variant='contained'
             sx={{
                 backgroundColor: '#15a246',

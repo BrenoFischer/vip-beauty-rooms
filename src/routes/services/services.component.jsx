@@ -1,9 +1,11 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GrAddCircle } from 'react-icons/gr';
 
 import { UserContext } from '../../context/user.context';
 import { ServiceContext } from '../../context/service.context';
+
+import { getServicesAndDocuments } from '../../utils/firebase';
 
 import Service from '../../components/service/service.component';
 
@@ -26,7 +28,17 @@ function Services() {
   // const masssageShortDetails = ["Relaxation Massage", "Deep Tissue Massage", "Indian Head Massage"];
 
   const { currentUser } = useContext(UserContext);
-  const { services } = useContext(ServiceContext);
+  const [ services, setServices ] = useState([]);
+
+  useEffect(() => {
+    async function fetchServices() {
+      const allServices = await getServicesAndDocuments();
+
+      setServices(allServices);
+    }
+    
+    fetchServices();
+  }, []);
 
   return (
     <> 
@@ -42,7 +54,7 @@ function Services() {
           }
         </div>
         <ul className='services__list'>
-          { services[0].items.map((service) => 
+          { services.map((service) => 
               <Service 
                 key={service.id}
                 img={service.imgUrl}

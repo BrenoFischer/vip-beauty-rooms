@@ -3,7 +3,7 @@ import CustomButton from '../button/button.component';
 
 import './service.styles.scss';
 
-function Service({img, title='', shortDetails='', details=''}) {
+function Service({img, title='', shortDetails='', details='', preview=false}) {
   const detailsState = {
     service: title,
     img: img,
@@ -24,16 +24,32 @@ function Service({img, title='', shortDetails='', details=''}) {
           </div>
         </div>
         <div className='service-button-container'>
-          <Link to='details' state={detailsState}>
-            <CustomButton buttonText="More details" />
-          </Link>
+          { preview ?
+              (
+                <CustomButton buttonText="More details" />
+              )
+            :
+              (<Link to='details' state={detailsState}>
+                <CustomButton buttonText="More details" />
+              </Link>)
+          }
         </div>
       </div>
-      <Link to='details' state={detailsState}>
-        <div className='service-image-container'>
-          <img className='service-image' src={img} alt={title} />
-        </div>
-      </Link>
+      { preview ?
+          (<div className='service-image-container'>
+            { img &&
+              <img className='service-image' src={img} alt={title} />
+            }
+          </div>)
+        :
+          (<Link to='details' state={detailsState}>
+            <div className='service-image-container'>
+              { img &&
+                <img className='service-image' src={img} alt={title} />
+              }
+            </div>
+          </Link>)
+      }
     </li>
   );
 }

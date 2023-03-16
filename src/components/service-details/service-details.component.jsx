@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './service-details.styles.scss';
 import CustomButton from '../../components/button/button.component';
 
-const ServiceDetails = ({ title, img, details }) => {
+const ServiceDetails = ({ title, img, details, preview=false }) => {
 
     return (
         <div className='service-details'>
@@ -13,9 +13,13 @@ const ServiceDetails = ({ title, img, details }) => {
             </div>
             <p className='service-details__text'>{details}</p>
             <div className='service-details__button-container'>
-                <Link to='/'>
+                { preview ?
                     <CustomButton buttonText="Back to services" />
-                </Link>
+                :
+                    <Link to='/'>
+                        <CustomButton buttonText="Back to services" />
+                    </Link>
+                }
             </div>
         </div>
     );
