@@ -23,9 +23,46 @@
     //     align-items: center;
     // }
 
+    &__title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     &__title {
         font-family: 'Allura', sans-serif;
         font-size: 10rem;
+    }
+}
+
+
+.add-service {
+    position: relative;
+
+    &:hover .add-service__tooltip {
+        visibility: visible;
+    }
+
+    &__icon {
+        margin-left: 3rem;
+        display: flex;
+        font-size: 6rem;
+        color: $primary-color;
+    }
+
+    &__tooltip {
+        visibility: hidden;
+        padding: 1rem;
+        min-width: 15rem;
+        position: absolute;
+        background-color: #fff5c3;
+        border-radius: 5px;
+        transform: translateX(-2rem);
+
+        &-text {
+            font-size: 1.5rem;
+            text-align: left;
+        }
     }
 }
 

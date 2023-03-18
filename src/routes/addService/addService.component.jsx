@@ -78,15 +78,11 @@ const AddService = () => {
     );  
   
     const addService = async (event) => {
-      console.log("iniciou")
       event.preventDefault();
 
       const url = await uploadImage();
-      console.log("url", url);
 
       const item = buildItem(url);
-      console.log("urel", url);
-      console.log("item",item);
 
       await addCollectionAndDocuments('services', [item]);
 
