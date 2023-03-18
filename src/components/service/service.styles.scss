@@ -45,15 +45,15 @@
     &-title-container {
         width: 80%;
         border-bottom: 3px solid $primary-color;
-        margin-bottom: 1.5rem;
         text-align: left;
+        margin-bottom: 2rem;
     }
 
     &-title {
         font-family: 'Montserrat', 'Lato', sans-serif;
         font-weight: 600;
         font-size: $list-items-font-size;
-        line-height: 1rem;
+        line-height: 2.4rem;
         letter-spacing: 0.2rem;
         margin-bottom: 2rem;
     }
@@ -71,11 +71,19 @@
         }
     }
 
+    &-image-container {
+        background-color: $secondary-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     &-image {
         width: 100%;
         max-width: $img-width;
         object-fit: cover;
         object-position: center;
+        
         cursor: pointer;
 
         @include respond(tab-port) {

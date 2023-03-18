@@ -3,6 +3,7 @@
 .service-details {
     width: $details-item-width;
     background-color: $light-gray;
+    padding-bottom: .1rem;
 
     &__image {
         width: 100%;
@@ -12,7 +13,7 @@
     }
 
     &__title-container {
-        // width: 80%;
+        width: 80%;
         border-bottom: 3px solid $primary-color;
         margin: 2rem 1rem;
         padding: 1.2rem 0;
@@ -22,7 +23,7 @@
         font-family: 'Montserrat', 'Lato', sans-serif;
         font-weight: 500;
         font-size: 3rem;
-        line-height: 1rem;
+        line-height: 3rem;
         letter-spacing: 0.2rem;
     }
 
@@ -39,6 +40,6 @@
     }
 
     &__button-container {
-        margin: 3rem 1rem;
+        margin: 3rem 0 2rem 2rem;
     }
 }
