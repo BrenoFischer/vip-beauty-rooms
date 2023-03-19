@@ -1,21 +1,22 @@
 @import '../../sassStyles/variables';
 @import '../../sassStyles/mixins';
 
-.add-service {
+.edit-service {
     &__container {
         padding: 0 5rem;
     }
-
-    &__description {
-        margin: 10rem 0;
+    
+    &__title-container {
         text-align: center;
+        margin: 10rem 0;
+    }
 
-        &-title {
-            display: inline-block;
-            font-family: 'Allura', sans-serif;
-            font-size: 8rem;
-            color: $secondary-color;
-            margin-bottom: 2rem;
+    &__title {
+        font-family: 'Allura', sans-serif;
+        font-size: 6rem;
+
+        span {
+            color: $primary-color;
         }
     }
 
@@ -27,7 +28,6 @@
             flex-direction: column;
         }
     }
-    
 
     &__form {
         &-title {
@@ -54,7 +54,6 @@
         }
     }
 
-
     input[type="file"] {
         display: none;
     }
@@ -79,7 +78,6 @@
         margin-top: 7rem;
         margin-left: 3rem;
     }
-    
 
     &__preview {
         display: flex;
@@ -121,4 +119,3 @@
         }
     }
 }
-

@@ -8,6 +8,7 @@
     justify-content: space-between;
     margin: 5rem 0;
     padding-left: 2rem;
+    position: relative;
 
     @include respond(tab-port) {
         width: $list-item-width-medium-phone;
@@ -106,4 +107,18 @@
             white-space: pre-line;
         }
     }
+
+    .edit-container {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        background-color: $secondary-color;
+        color: $primary-color;
+        font-size: 3rem;
+        border-radius: 50%;
+        padding: 1rem;
+        display: flex;
+    }
 }
+
+

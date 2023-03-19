@@ -46,6 +46,7 @@ function Services() {
           { services.map((service) => 
               <Service 
                 key={service.id}
+                id={service.id}
                 img={service.imgUrl}
                 alt={service.alt}
                 title={service.title}

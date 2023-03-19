@@ -1,13 +1,27 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { BsPencilSquare } from 'react-icons/bs';
+
 import CustomButton from '../button/button.component';
+
+import { UserContext } from '../../context/user.context';
 
 import './service.styles.scss';
 
-function Service({img, title='', shortDetails='', details='', preview=false}) {
+function Service({img, id='', title='', shortDetails='', details='', preview=false}) {
+  const { currentUser } = useContext(UserContext);
   const detailsState = {
     service: title,
     img: img,
     details: details,
+  };
+
+  const editServiceState = {
+    id: id,
+    title: title,
+    img: img,
+    details: details,
+    shortDetails: shortDetails
   };
 
   return (
@@ -49,6 +63,13 @@ function Service({img, title='', shortDetails='', details='', preview=false}) {
               }
             </div>
           </Link>)
+      }
+      { currentUser &&
+        <Link to='edit-service' state={editServiceState}>
+          <div className='edit-container'>
+            <BsPencilSquare />
+          </div>
+        </Link>
       }
     </li>
   );

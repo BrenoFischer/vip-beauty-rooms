@@ -8,6 +8,7 @@ import { uploadImageToStorage, addCollectionAndDocuments } from '../../utils/fir
 import ServiceDetails from '../../components/service-details/service-details.component';
 import Service from '../../components/service/service.component';
 import Footer from '../../components/footer/footer.component';
+import InputField from '../../components/inputField/inputField.component';
 
 import { UserContext } from '../../context/user.context';
 
@@ -18,26 +19,7 @@ const defaultFormFields = {
     details: '',
     title: '',
     short: '',
-  }
-
-
-const InputField = ({label, isTextArea=false, ...otherProps}) => (
-  <div className='form__input-field'>
-    { isTextArea ?
-      (
-        <textarea className='form__input textarea' {...otherProps} />
-      ) 
-    :
-      (
-        <input className='form__input' {...otherProps} />
-      )
-    }
-    <label className={`${otherProps.value.length ? 'shrink' : ''} form__input-label`}>
-      {label}
-    </label>
-  </div>
-);
-  
+}
 
 const AddService = () => {
     const form = useRef();
@@ -107,95 +89,95 @@ const AddService = () => {
             <div className='add-service__description'>
               <h2 className='add-service__description-title'>Add a new service</h2>
             </div>
-              <div className='add-service__wrapper'>
-                <form className='add-service__form' onSubmit={addService}>
-                  <h3 className='add-service__form-title'>Fill in the service information</h3>
-                  <div className='add-service__form-fields'>
-                    <label htmlFor="file-upload" className="add-service__file-upload">
-                      <div className='add-service__file-upload-icon'>
-                        <BiImageAdd /> 
-                      </div>
-                        Click here to add a Custom Image
-                    </label>
-                    <input id="file-upload" type="file" accept='image/*' name='imgUrl' onChange={handleImageInputChange}/>
-                    {/* <button onClick={uploadImage}>Upload Image</button> */}
-                    <InputField 
-                      required
-                      name="title"
-                      label="Service Title"
-                      onChange={handleInputChange}
-                      value={title}
-                      type="text"
-                    />
-                    <InputField 
-                      isTextArea={true}
-                      required
-                      name="short"
-                      label="Short Description"
-                      rows="2"
-                      cols="50"
-                      onChange={handleInputChange}
-                      value={short}
-                    />
-                    <InputField 
-                      isTextArea={true}
-                      required
-                      name="details"
-                      label="Service Details"
-                      rows="4"
-                      cols="50"
-                      onChange={handleInputChange}
-                      value={details}
-                    />
-                  </div>
-                  <div className='add-service__button-wrapper'>
-                    <CustomButton buttonText="Add service" type='submit' />
-                  </div>
-                </form>
-                <div className='add-service__preview'>
-                  <div className='add-service__preview-wrapper'>
-                    <div className='add-service__preview-title-wrapper'>
-                      <h3 className='add-service__preview-title'>Preview from the main page</h3>
-                      <div className='add-service__preview-title-icon' onClick={togglePreviewShort}>
-                        { hideShortPreview ?
-                            <BiMessageSquareAdd />
-                          :
-                            <BiMinusCircle />
-                        }
-                      </div>
+            <div className='add-service__wrapper'>
+              <form className='add-service__form' onSubmit={addService}>
+                <h3 className='add-service__form-title'>Fill in the service information</h3>
+                <div className='add-service__form-fields'>
+                  <label htmlFor="file-upload" className="add-service__file-upload">
+                    <div className='add-service__file-upload-icon'>
+                      <BiImageAdd /> 
                     </div>
-                    { !hideShortPreview &&
-                      <Service 
-                        img={imgUrlPreview}
-                        title={title}
-                        shortDetails={short}
-                        preview={true}
-                      />
-                    }
-                  </div>
-                  <div className='add-service__preview-wrapper'>
-                    <div className='add-service__preview-title-wrapper'>
-                      <h3 className='add-service__preview-title'>Preview when you click for more details</h3>
-                      <div className='add-service__preview-title-icon' onClick={togglePreview}>
-                        { hidePreview ?
-                            <BiMessageSquareAdd />
-                          :
-                            <BiMinusCircle />
-                        }
-                      </div>
+                      Click here to add a Custom Image
+                  </label>
+                  <input id="file-upload" type="file" accept='image/*' name='imgUrl' onChange={handleImageInputChange}/>
+                  {/* <button onClick={uploadImage}>Upload Image</button> */}
+                  <InputField 
+                    required
+                    name="title"
+                    label="Service Title"
+                    onChange={handleInputChange}
+                    value={title}
+                    type="text"
+                  />
+                  <InputField 
+                    isTextArea={true}
+                    required
+                    name="short"
+                    label="Short Description"
+                    rows="2"
+                    cols="50"
+                    onChange={handleInputChange}
+                    value={short}
+                  />
+                  <InputField 
+                    isTextArea={true}
+                    required
+                    name="details"
+                    label="Service Details"
+                    rows="4"
+                    cols="50"
+                    onChange={handleInputChange}
+                    value={details}
+                  />
+                </div>
+                <div className='add-service__button-wrapper'>
+                  <CustomButton buttonText="Add service" type='submit' />
+                </div>
+              </form>
+              <div className='add-service__preview'>
+                <div className='add-service__preview-wrapper'>
+                  <div className='add-service__preview-title-wrapper'>
+                    <h3 className='add-service__preview-title'>Preview from the main page</h3>
+                    <div className='add-service__preview-title-icon' onClick={togglePreviewShort}>
+                      { hideShortPreview ?
+                          <BiMessageSquareAdd />
+                        :
+                          <BiMinusCircle />
+                      }
                     </div>
-                    { !hidePreview &&
-                      <ServiceDetails
-                        title={title}
-                        img={imgUrlPreview}
-                        details={details}
-                        preview={true}
-                      />
-                    }
                   </div>
+                  { !hideShortPreview &&
+                    <Service 
+                      img={imgUrlPreview}
+                      title={title}
+                      shortDetails={short}
+                      preview={true}
+                    />
+                  }
+                </div>
+                <div className='add-service__preview-wrapper'>
+                  <div className='add-service__preview-title-wrapper'>
+                    <h3 className='add-service__preview-title'>Preview when you click for more details</h3>
+                    <div className='add-service__preview-title-icon' onClick={togglePreview}>
+                      { hidePreview ?
+                          <BiMessageSquareAdd />
+                        :
+                          <BiMinusCircle />
+                      }
+                    </div>
+                  </div>
+                  { !hidePreview &&
+                    <ServiceDetails
+                      title={title}
+                      img={imgUrlPreview}
+                      details={details}
+                      preview={true}
+                    />
+                  }
                 </div>
               </div>
             </div>
+          </div>
         :
           <div>
             <h2>Sorry, this is an area for Unique Beauty Managers</h2>
