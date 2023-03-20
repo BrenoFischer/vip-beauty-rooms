@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { MdAddCircleOutline } from 'react-icons/md';
 
 import { UserContext } from '../../context/user.context';
-
-import { getServicesAndDocuments } from '../../utils/firebase';
+import { ServicesContext } from '../../context/services.context';
 
 import Service from '../../components/service/service.component';
 
@@ -12,17 +11,7 @@ import './services.styles.scss';
 
 function Services() {
   const { currentUser } = useContext(UserContext);
-  const [ services, setServices ] = useState([]);
-
-  useEffect(() => {
-    async function fetchServices() {
-      const allServices = await getServicesAndDocuments();
-
-      setServices(allServices);
-    }
-
-    fetchServices();
-  }, []);
+  const { services, setServices } = useContext(ServicesContext);
 
   return (
     <> 

@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, collection, writeBatch, doc, query, getDocs, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, writeBatch, doc, query, getDocs, updateDoc, deleteDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Your web app's Firebase configuration
@@ -87,6 +87,8 @@ export const getServicesAndDocuments = async () => {
 }
 
 
+//change/add fields from a service document, based on doc id and data sent.
+// If data fields are the same from doc, it will be edited, if new fields are passed, it'll be added
 export const editServiceDocument = async (id, data) => {
   const collectionRef = collection(db, 'services');
 
@@ -94,6 +96,17 @@ export const editServiceDocument = async (id, data) => {
 
   await updateDoc(docRef, data);
 }
+
+
+//delete a service document based on its id
+export const deleteServiceDocument = async (id) => {
+  const collectionRef = collection(db, 'services');
+
+  const docRef = getDocument(collectionRef, id);
+
+  await deleteDoc(docRef);
+}
+
 
 //authenticate with email and password given
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {

@@ -1,12 +1,14 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { BsPencilSquare } from 'react-icons/bs';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 import CustomButton from '../button/button.component';
 
 import { UserContext } from '../../context/user.context';
 
 import './service.styles.scss';
+import { deleteServiceDocument } from '../../utils/firebase';
 
 function Service({img, id='', title='', shortDetails='', details='', preview=false}) {
   const { currentUser } = useContext(UserContext);
@@ -23,6 +25,8 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
     details: details,
     shortDetails: shortDetails
   };
+
+  const deleteService = async () => await deleteServiceDocument(id);
 
   return (
     <li className='service'>
@@ -65,11 +69,18 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
           </Link>)
       }
       { currentUser &&
-        <Link to='edit-service' state={editServiceState}>
-          <div className='edit-container'>
-            <BsPencilSquare />
+        <div className='actions-container'>
+          <Link to='edit-service' state={editServiceState}>
+            <div className='edit-container'>
+              <BsPencilSquare />
+            </div>
+          </Link>
+
+          <div className='delete-container' onClick={deleteService}>
+            <AiOutlineDelete />
           </div>
-        </Link>
+        </div>
+        
       }
     </li>
   );
