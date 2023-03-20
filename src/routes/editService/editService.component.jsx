@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { BiMessageSquareAdd, BiMinusCircle } from 'react-icons/bi';
+import { BiMessageSquareAdd, BiMinusCircle, BiImageAdd } from 'react-icons/bi';
+import { v4 } from 'uuid';
 
 import { UserContext } from '../../context/user.context';
 import InputField from '../../components/inputField/inputField.component';
@@ -10,6 +11,7 @@ import ServiceDetails from '../../components/service-details/service-details.com
 
 import './editService.styles.scss';
 import Footer from '../../components/footer/footer.component';
+import { editServiceDocument, uploadImageToStorage } from '../../utils/firebase';
 
 const EditService = () => {
     const { currentUser } = useContext(UserContext);
@@ -18,16 +20,16 @@ const EditService = () => {
 
     const defaultFormFields = {
         titleField: title,
-        imgField: img,
         detailsField: details,
         shortDetailsField: shortDetails,
     }
 
     const [ formFields, setFormFields ] = useState(defaultFormFields);
-    const { titleField, imgField, detailsField, shortDetailsField } = formFields;
+    const { titleField, detailsField, shortDetailsField } = formFields;
     const [ hidePreview, setHidePreview ] = useState(false);
     const [ hideShortPreview, setHideShortPreview ] = useState(false);
     const [ imgUrlPreview, setImgUrlPreview ] = useState(img);
+    const [ imgUpload, setImgUpload ] = useState(null);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -37,7 +39,36 @@ const EditService = () => {
     }
 
 
-    const editService = () => {}
+    const uploadImage = async () => {
+        if(!imgUpload) return imgUrlPreview;
+    
+        const filePath = `services/${imgUpload.name + v4()}`;
+        const url = await uploadImageToStorage(filePath, imgUpload);
+    
+        return url;
+      }
+
+
+    const handleImageInputChange = (event) => {
+        setImgUpload(event.target.files[0]);
+        setImgUrlPreview(URL.createObjectURL(event.target.files[0]));
+    }
+
+
+    const editService = async (event) => {
+        event.preventDefault();
+
+        const imgUrl = await uploadImage();
+
+        const data = {
+            details: detailsField,
+            imgUrl: imgUrl,
+            shortDetails: shortDetailsField,
+            title: titleField
+        }
+
+        await editServiceDocument(id, data);
+    }
 
     const togglePreview = () => setHidePreview(!hidePreview);
 
@@ -55,6 +86,13 @@ const EditService = () => {
                         <form className='edit-service__form' onSubmit={editService}>
                             <h3 className='edit-service__form-title'>Modify the service information</h3>
                             <div className='edit-service__form-fields'>
+                                <label htmlFor="file-upload" className="edit-service__file-upload">
+                                    <div className='edit-service__file-upload-icon'>
+                                        <BiImageAdd /> 
+                                    </div>
+                                        Click here to add a Custom Image
+                                </label>
+                                <input id="file-upload" type="file" accept='image/*' name='imgUrl' onChange={handleImageInputChange}/>
                                 <InputField 
                                     required
                                     name="titleField"

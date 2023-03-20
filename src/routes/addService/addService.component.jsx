@@ -1,4 +1,4 @@
-import { useContext, useState, useRef } from 'react';
+import { useContext, useState } from 'react';
 import { v4 } from 'uuid';
 
 import { BiImageAdd, BiMinusCircle, BiMessageSquareAdd } from 'react-icons/bi';
@@ -22,8 +22,6 @@ const defaultFormFields = {
 }
 
 const AddService = () => {
-    const form = useRef();
-
     const { currentUser } = useContext(UserContext);
   
     const [ imageUpload, setImageUpload ] = useState(null);

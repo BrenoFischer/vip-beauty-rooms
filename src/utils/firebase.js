@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, collection, writeBatch, doc, query, getDocs } from 'firebase/firestore';
+import { getFirestore, collection, writeBatch, doc, query, getDocs, updateDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 // Your web app's Firebase configuration
@@ -40,11 +40,20 @@ export const uploadImageToStorage = async (filePath, image) => {
   return url;
 }
 
+
+//given a filepath, returns the URL of the image from Storage in Firebase
 export const getImageFromStorage = async (filePath) => {
   const imageRef = ref(storage, filePath);
 
   return await getDownloadURL(imageRef);
 }
+
+
+//returns one document reference, based on a collection given and key of the documents
+export const getDocument = (collectionRef, key) => {
+  return doc(collectionRef, key);
+}
+
 
 //receive a collection key and add/create a document to that collection. It'll add each object passed, based on its ID
 export const addCollectionAndDocuments = async (collectionKey, objects) => {
@@ -56,7 +65,7 @@ export const addCollectionAndDocuments = async (collectionKey, objects) => {
 
   objects.forEach((object) => {
     //get the document on the corresponding collection of the db, based on the title, that matches the object passed
-    const docRef = doc(collectionRef, object.id);
+    const docRef = getDocument(collectionRef, object.id);
     //insert the object on the document from the db
     batch.set(docRef, object);
   });
@@ -65,6 +74,8 @@ export const addCollectionAndDocuments = async (collectionKey, objects) => {
   await batch.commit();
 }
 
+
+//returns all documents from the services collection inside firestore
 export const getServicesAndDocuments = async () => {
   const collectionRef = collection(db, 'services');
   const q = query(collectionRef);
@@ -72,8 +83,16 @@ export const getServicesAndDocuments = async () => {
   const querySnapshot = await getDocs(q);
 
   const services = querySnapshot.docs.map(doc => doc.data());
-  console.log(services);
   return services
+}
+
+
+export const editServiceDocument = async (id, data) => {
+  const collectionRef = collection(db, 'services');
+
+  const docRef = getDocument(collectionRef, id);
+
+  await updateDoc(docRef, data);
 }
 
 //authenticate with email and password given
@@ -83,9 +102,11 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
 }
 
+
 //Listener that handle when authentication is changed. It needs a callback function that will receive the User state whenever auth is changed
 export const onAuthStateChangeListener = (callback) => 
   onAuthStateChanged(auth, callback);
+
 
 //Sign out the current user
 export const signOutUser = async () => await signOut(auth);
