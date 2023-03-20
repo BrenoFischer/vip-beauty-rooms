@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline } from 'react-icons/md';
 
@@ -11,7 +11,7 @@ import './services.styles.scss';
 
 function Services() {
   const { currentUser } = useContext(UserContext);
-  const { services, setServices } = useContext(ServicesContext);
+  const { services } = useContext(ServicesContext);
 
   return (
     <> 
