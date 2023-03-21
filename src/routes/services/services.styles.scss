@@ -55,7 +55,7 @@
         padding: 1rem;
         min-width: 15rem;
         position: absolute;
-        background-color: #fff5c3;
+        background-color: $yellowish-white;
         border-radius: 5px;
         transform: translateX(-2rem);
 
@@ -66,3 +66,30 @@
     }
 }
 
+
+.modal {
+    background-color: $yellowish-white;
+    min-width: 10rem;
+    padding: 3rem;
+    box-shadow: rgba(18, 30, 39, 0.6) 5px 5px;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    text-align: center;
+    z-index: 999;
+
+    &__title {
+        font-size: 1.6rem;
+    }
+
+    &__buttons-container {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__button-wrapper {
+        margin-right: 2rem;
+    }
+}

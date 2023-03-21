@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsPencilSquare } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -10,7 +10,7 @@ import { UserContext } from '../../context/user.context';
 import './service.styles.scss';
 import { deleteServiceDocument } from '../../utils/firebase';
 
-function Service({img, id='', title='', shortDetails='', details='', preview=false}) {
+function Service({img, id='', title='', shortDetails='', details='', preview=false, setModalOpen=()=>null, confirmDelete=false, setConfirmDelete=()=>null}) {
   const { currentUser } = useContext(UserContext);
   const detailsState = {
     service: title,
@@ -26,8 +26,24 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
     shortDetails: shortDetails
   };
 
-  const deleteService = async () => await deleteServiceDocument(id);
+  const deleteService = () => {
+    setModalOpen(true);
+  }
 
+
+  useEffect(() => {
+    const checkIfServiceIsDeleted = async () => {
+      if(confirmDelete) {
+        // await deleteServiceDocument(id);
+        setConfirmDelete(false);
+        setModalOpen(false);
+        console.log("deletou")
+      } 
+    }
+
+    checkIfServiceIsDeleted();
+  }, [confirmDelete]);
+  
   return (
     <li className='service'>
       <div className='service-left-container'>
