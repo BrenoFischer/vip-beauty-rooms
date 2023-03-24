@@ -20,7 +20,7 @@ export const ServicesProvider = ({ children }) => {
         }
         
         fetchServices();
-    }, [services]);
+    }, []);
 
     return <ServicesContext.Provider value={value}>{children}</ServicesContext.Provider>
 }
