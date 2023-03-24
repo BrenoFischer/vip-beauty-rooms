@@ -1,18 +1,14 @@
 import { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { BiMessageSquareAdd, BiMinusCircle, BiImageAdd } from 'react-icons/bi';
 import { v4 } from 'uuid';
 
 import { UserContext } from '../../context/user.context';
-import InputField from '../../components/inputField/inputField.component';
-import CustomButton from '../../components/button/button.component';
-import Service from '../../components/service/service.component';
-import ServiceDetails from '../../components/service-details/service-details.component';
 
-import './editService.styles.scss';
-import Footer from '../../components/footer/footer.component';
 import { editServiceDocument, uploadImageToStorage } from '../../utils/firebase';
+
+import Footer from '../../components/footer/footer.component';
 import ServiceForm from '../../components/serviceForm/serviceForm.component';
+import './editService.styles.scss';
 
 const EditService = () => {
     const { currentUser } = useContext(UserContext);
