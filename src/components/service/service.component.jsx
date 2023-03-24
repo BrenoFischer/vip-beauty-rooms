@@ -2,16 +2,15 @@ import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsPencilSquare } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { useSelector } from 'react-redux';
 
 import CustomButton from '../button/button.component';
-
-import { UserContext } from '../../context/user.context';
 
 import './service.styles.scss';
 import { deleteServiceDocument } from '../../utils/firebase';
 
 function Service({img, id='', title='', shortDetails='', details='', preview=false}) {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const [ modalOpen, setModalOpen ] = useState(false);
 
   console.log("montou");

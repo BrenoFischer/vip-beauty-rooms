@@ -1,8 +1,7 @@
 import { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
-
-import { UserContext } from '../../context/user.context';
 
 import { editServiceDocument, uploadImageToStorage } from '../../utils/firebase';
 
@@ -11,7 +10,7 @@ import ServiceForm from '../../components/serviceForm/serviceForm.component';
 import './editService.styles.scss';
 
 const EditService = () => {
-    const { currentUser } = useContext(UserContext);
+    const currentUser = useSelector((state) => state.user.currentUser);
     const location = useLocation();
     const { id, titleLoc, img, detailsLoc, shortDetailsLoc } = location.state;
 

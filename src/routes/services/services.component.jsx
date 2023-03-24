@@ -1,19 +1,18 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline } from 'react-icons/md';
 
-import { UserContext } from '../../context/user.context';
 import { ServicesContext } from '../../context/services.context';
 
 import Service from '../../components/service/service.component';
-import CustomButton from '../../components/button/button.component';
 
 import './services.styles.scss';
 import SERVICES from '../../servicesData';
 import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
 
 function Services() {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector((state) => state.user.currentUser);
   // const { services } = useContext(ServicesContext);
   const services = [SERVICES];
 

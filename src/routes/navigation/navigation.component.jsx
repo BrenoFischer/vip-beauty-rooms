@@ -1,16 +1,14 @@
-import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Link, Outlet } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 import { signOutUser } from '../../utils/firebase';
 
-import { UserContext } from '../../context/user.context';
-
 import './navigation.styles.scss';
 
 const Navigation = () => {
-    const { currentUser } = useContext(UserContext);
+    const currentUser = useSelector((state) => state.user.currentUser);
 
     return(
         <>

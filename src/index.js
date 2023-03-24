@@ -1,24 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import './index.scss';
-import App from './App';
-import { UserProvider } from './context/user.context';
+import { Provider } from 'react-redux';
+
 import { ServicesProvider } from './context/services.context';
+import App from './App';
+import { store } from './store/store';
+
 import ScrollToTop from './utils/ScrollToTop';
 import reportWebVitals from './reportWebVitals';
+
+import './index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <ScrollToTop />
-      <UserProvider>
-        <ServicesProvider>
-          <App />
-        </ServicesProvider>
-      </UserProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <ScrollToTop />
+        {/* <UserProvider> */}
+          <ServicesProvider>
+            <App />
+          </ServicesProvider>
+        {/* </UserProvider> */}
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>
 );
 

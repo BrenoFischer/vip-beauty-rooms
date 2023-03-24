@@ -1,12 +1,11 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
 
 import { uploadImageToStorage, addCollectionAndDocuments } from '../../utils/firebase';
 
 import Footer from '../../components/footer/footer.component';
 import ServiceForm from '../../components/serviceForm/serviceForm.component';
-
-import { UserContext } from '../../context/user.context';
 
 import './addService.styles.scss';
 
@@ -17,7 +16,7 @@ const defaultFormFields = {
 }
 
 const AddService = () => {
-    const { currentUser } = useContext(UserContext);
+    const currentUser = useSelector((state) => state.user.currentUser);
   
     const [ formFields, setFormFields ] = useState(defaultFormFields);
     const { details, title, shortDetails } = formFields;
