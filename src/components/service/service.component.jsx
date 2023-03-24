@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsPencilSquare } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -10,8 +10,12 @@ import { UserContext } from '../../context/user.context';
 import './service.styles.scss';
 import { deleteServiceDocument } from '../../utils/firebase';
 
-function Service({img, id='', title='', shortDetails='', details='', preview=false, setModalOpen=()=>null, confirmDelete=false, setConfirmDelete=()=>null}) {
+function Service({img, id='', title='', shortDetails='', details='', preview=false}) {
   const { currentUser } = useContext(UserContext);
+  const [ modalOpen, setModalOpen ] = useState(false);
+
+  console.log("montou");
+
   const detailsState = {
     service: title,
     img: img,
@@ -31,18 +35,48 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
   }
 
 
-  useEffect(() => {
-    const checkIfServiceIsDeleted = async () => {
-      if(confirmDelete) {
-        // await deleteServiceDocument(id);
-        setConfirmDelete(false);
-        setModalOpen(false);
-        console.log("deletou")
-      } 
+  const Modal = () => {
+    const onCancel = () => {
+      setModalOpen(false);
     }
 
-    checkIfServiceIsDeleted();
-  }, [confirmDelete]);
+    const onConfirm = () => {
+      setModalOpen(false);
+      console.log("deletou")
+    }
+
+    return(
+      <div className='modal'>
+        <h2 className='modal__title'>Are you sure you want to delete this service?</h2>
+        <div className='modal__buttons-container'>
+          <div className='modal__button-wrapper'>
+            <CustomButton 
+              buttonText="Yes"
+              onClickAction={onConfirm}
+            />
+          </div>
+          <CustomButton 
+            buttonText="No"
+            secondaryStyle={true}
+            onClickAction={onCancel}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  // useEffect(() => {
+  //   const checkIfServiceIsDeleted = async () => {
+  //     if(confirmDelete) {
+  //       // await deleteServiceDocument(id);
+  //       setConfirmDelete(false);
+  //       setModalOpen(false);
+  //       console.log("deletou")
+  //     } 
+  //   }
+  
+  //   checkIfServiceIsDeleted();
+  // }, [confirmDelete]);
   
   return (
     <li className='service'>
@@ -96,8 +130,10 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
             <AiOutlineDelete />
           </div>
         </div>
-        
       }
+      { modalOpen && 
+          <Modal />
+       }
     </li>
   );
 }

@@ -13,41 +13,8 @@ import SERVICES from '../../servicesData';
 
 function Services() {
   const { currentUser } = useContext(UserContext);
-  const { services } = useContext(ServicesContext);
-  // const services = [SERVICES];
-  const [ modalOpen, setModalOpen ] = useState(false);
-  const [ confirmDelete, setConfirmDelete ] = useState(false);
-
-
-  const Modal = () => {
-    const onCancel = () => {
-      setModalOpen(false);
-    }
-
-    const onConfirm = () => {
-      setConfirmDelete(true);
-    }
-  
-    return(
-      <div className='modal'>
-        <h2 className='modal__title'>Are you sure you want to delete this service?</h2>
-        <div className='modal__buttons-container'>
-          <div className='modal__button-wrapper'>
-            <CustomButton 
-              buttonText="Yes"
-              onClickAction={onConfirm}
-            />
-          </div>
-          <CustomButton 
-            buttonText="No"
-            secondaryStyle={true}
-            onClickAction={onCancel}
-          />
-        </div>
-      </div>
-    );
-  }
-
+  // const { services } = useContext(ServicesContext);
+  const services = [SERVICES];
 
   return (
     <> 
@@ -68,7 +35,7 @@ function Services() {
           }
         </div>
         <ul className='services__list'>
-          { services.map((service) => 
+          { services[0].map((service) => 
               <Service 
                 key={service.id}
                 id={service.id}
@@ -77,16 +44,10 @@ function Services() {
                 title={service.title}
                 details={service.details}
                 shortDetails={service.shortDetails}
-                setModalOpen={(bool) => setModalOpen(bool)}
-                confirmDelete={confirmDelete}
-                setConfirmDelete={(bool) => setConfirmDelete(bool)}
               />
             )
           }
         </ul>
-        { modalOpen && 
-          <Modal />
-        }
       </main>
     </>
   );
