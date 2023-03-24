@@ -1,0 +1,24 @@
+@import '../../sassStyles/variables';
+
+.spinner-container {
+    margin-left: 5rem;
+}
+
+.loading-spinner {
+    width: 5rem;
+    height: 5rem;
+    border: 1rem solid $primary-color; 
+    border-top: 1rem solid $secondary-color;
+    border-radius: 50%;
+    animation: spinner 1.5s linear infinite;
+}
+
+
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}

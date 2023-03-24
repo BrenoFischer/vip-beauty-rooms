@@ -10,6 +10,7 @@ import CustomButton from '../../components/button/button.component';
 
 import './services.styles.scss';
 import SERVICES from '../../servicesData';
+import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
 
 function Services() {
   const { currentUser } = useContext(UserContext);
@@ -35,17 +36,22 @@ function Services() {
           }
         </div>
         <ul className='services__list'>
-          { services[0].map((service) => 
-              <Service 
-                key={service.id}
-                id={service.id}
-                img={service.imgUrl}
-                alt={service.alt}
-                title={service.title}
-                details={service.details}
-                shortDetails={service.shortDetails}
-              />
-            )
+          { !services[0] ? 
+            <div>
+              <LoadingSpinner />
+            </div>
+          :        
+            services[0].map((service) => 
+                <Service 
+                  key={service.id}
+                  id={service.id}
+                  img={service.imgUrl}
+                  alt={service.alt}
+                  title={service.title}
+                  details={service.details}
+                  shortDetails={service.shortDetails}
+                />
+              )
           }
         </ul>
       </main>

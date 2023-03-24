@@ -12,31 +12,24 @@ import ServiceDetails from '../../components/service-details/service-details.com
 import './editService.styles.scss';
 import Footer from '../../components/footer/footer.component';
 import { editServiceDocument, uploadImageToStorage } from '../../utils/firebase';
+import ServiceForm from '../../components/serviceForm/serviceForm.component';
 
 const EditService = () => {
     const { currentUser } = useContext(UserContext);
     const location = useLocation();
-    const { id, title, img, details, shortDetails } = location.state;
+    const { id, titleLoc, img, detailsLoc, shortDetailsLoc } = location.state;
 
     const defaultFormFields = {
-        titleField: title,
-        detailsField: details,
-        shortDetailsField: shortDetails,
+        title: titleLoc,
+        details: detailsLoc,
+        shortDetails: shortDetailsLoc,
     }
 
     const [ formFields, setFormFields ] = useState(defaultFormFields);
-    const { titleField, detailsField, shortDetailsField } = formFields;
-    const [ hidePreview, setHidePreview ] = useState(false);
-    const [ hideShortPreview, setHideShortPreview ] = useState(false);
+    const { title, details, shortDetails } = formFields;
+    const [ loading, setLoading ] = useState(false);
     const [ imgUrlPreview, setImgUrlPreview ] = useState(img);
     const [ imgUpload, setImgUpload ] = useState(null);
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-    
-        console.log(name, value);
-        setFormFields({...formFields, [name]: value});
-    }
 
 
     const uploadImage = async () => {
@@ -57,23 +50,20 @@ const EditService = () => {
 
     const editService = async (event) => {
         event.preventDefault();
+        setLoading(true);
 
         const imgUrl = await uploadImage();
-
+        
         const data = {
-            details: detailsField,
+            details: details,
             imgUrl: imgUrl,
-            shortDetails: shortDetailsField,
-            title: titleField
+            shortDetails: shortDetails,
+            title: title
         }
-
+        
         await editServiceDocument(id, data);
+        setLoading(false);
     }
-
-    const togglePreview = () => setHidePreview(!hidePreview);
-
-    const togglePreviewShort = () => setHideShortPreview(!hideShortPreview);
-
 
     return(
         <section className='edit-service'>
@@ -82,93 +72,15 @@ const EditService = () => {
                     <div className='edit-service__title-container'>
                         <h2 className='edit-service__title'>Edit service - <span>{title}</span></h2>
                     </div>
-                    <div className='edit-service__wrapper'>
-                        <form className='edit-service__form' onSubmit={editService}>
-                            <h3 className='edit-service__form-title'>Modify the service information</h3>
-                            <div className='edit-service__form-fields'>
-                                <label htmlFor="file-upload" className="edit-service__file-upload">
-                                    <div className='edit-service__file-upload-icon'>
-                                        <BiImageAdd /> 
-                                    </div>
-                                        Click here to add a Custom Image
-                                </label>
-                                <input id="file-upload" type="file" accept='image/*' name='imgUrl' onChange={handleImageInputChange}/>
-                                <InputField 
-                                    required
-                                    name="titleField"
-                                    label="Service Title"
-                                    onChange={handleInputChange}
-                                    value={titleField}
-                                    type="text"
-                                />
-                                <InputField 
-                                    isTextArea={true}
-                                    required
-                                    name="shortDetailsField"
-                                    label="Short Description"
-                                    rows="2"
-                                    cols="50"
-                                    onChange={handleInputChange}
-                                    value={shortDetailsField}
-                                />
-                                <InputField 
-                                    isTextArea={true}
-                                    required
-                                    name="detailsField"
-                                    label="Service Details"
-                                    rows="4"
-                                    cols="50"
-                                    onChange={handleInputChange}
-                                    value={detailsField}
-                                />
-                            </div>
-                            <div className='edit-service__button-wrapper'>
-                                <CustomButton buttonText="Edit service" type='submit' />
-                            </div>
-                        </form>
-                        <div className='edit-service__preview'>
-                            <div className='edit-service__preview-wrapper'>
-                                <div className='edit-service__preview-title-wrapper'>
-                                    <h3 className='edit-service__preview-title'>Preview from the main page</h3>
-                                    <div className='edit-service__preview-title-icon' onClick={togglePreviewShort}>
-                                        { hideShortPreview ?
-                                            <BiMessageSquareAdd />
-                                        :
-                                            <BiMinusCircle />
-                                        }
-                                    </div>
-                                </div>
-                                { !hideShortPreview &&
-                                <Service 
-                                    img={imgUrlPreview}
-                                    title={titleField}
-                                    shortDetails={shortDetailsField}
-                                    preview={true}
-                                />
-                                }
-                            </div>
-                            <div className='edit-service__preview-wrapper'>
-                                <div className='edit-service__preview-title-wrapper'>
-                                    <h3 className='edit-service__preview-title'>Preview when you click for more details</h3>
-                                    <div className='edit-service__preview-title-icon' onClick={togglePreview}>
-                                        { hidePreview ?
-                                            <BiMessageSquareAdd />
-                                        :
-                                            <BiMinusCircle />
-                                        }
-                                    </div>
-                                </div>
-                                { !hidePreview &&
-                                <ServiceDetails
-                                    title={titleField}
-                                    img={imgUrlPreview}
-                                    details={detailsField}
-                                    preview={true}
-                                />
-                                }
-                            </div>
-                        </div>
-                    </div>
+                    <ServiceForm 
+                        onFormSubmit={editService}
+                        loading={loading}
+                        setFormFields={setFormFields}
+                        formFields={formFields}
+                        handleImageInputChange={handleImageInputChange}
+                        imgUrlPreview={imgUrlPreview}
+                        buttonTitle="Edit service"
+                    />
                 </div>
             :
             <div>

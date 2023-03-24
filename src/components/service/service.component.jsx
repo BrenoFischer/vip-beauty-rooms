@@ -24,10 +24,10 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
 
   const editServiceState = {
     id: id,
-    title: title,
+    titleLoc: title,
     img: img,
-    details: details,
-    shortDetails: shortDetails
+    detailsLoc: details,
+    shortDetailsLoc: shortDetails
   };
 
   const deleteService = () => {
@@ -118,7 +118,7 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
             </div>
           </Link>)
       }
-      { currentUser &&
+      { currentUser && !preview &&
         <div className='actions-container'>
           <Link to='edit-service' state={editServiceState}>
             <div className='edit-container'>
