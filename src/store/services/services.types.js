@@ -1,0 +1,3 @@
+export const SERVICES_ACTION_TYPES = {
+    SET_SERVICES: 'SET_SERVICES'
+}

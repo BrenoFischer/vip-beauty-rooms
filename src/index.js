@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { ServicesProvider } from './context/services.context';
 import App from './App';
 import { store } from './store/store';
 
@@ -18,11 +17,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <ScrollToTop />
-        {/* <UserProvider> */}
-          <ServicesProvider>
-            <App />
-          </ServicesProvider>
-        {/* </UserProvider> */}
+          <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

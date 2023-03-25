@@ -1,14 +1,28 @@
-import { useRef } from 'react';
-
-import Services from '../services/services.component';
-
+import { useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-import './home.styles.scss';
+import Services from '../services/services.component';
 import Footer from '../../components/footer/footer.component';
+
+import { getServicesAndDocuments } from "../../utils/firebase";
+import { setServices } from '../../store/services/services.action';
+
+import './home.styles.scss';
 
 function Home() {
   const servicesRef = useRef(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+      async function fetchServices() {
+          const allServices = await getServicesAndDocuments();
+      
+          dispatch(setServices(allServices));
+      }
+      
+      fetchServices();
+  }, [dispatch]);
   
 
   const scrollToServices = (ref) => {

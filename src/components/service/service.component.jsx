@@ -1,17 +1,21 @@
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BsPencilSquare } from 'react-icons/bs';
 import { AiOutlineDelete } from 'react-icons/ai';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import CustomButton from '../button/button.component';
 
-import './service.styles.scss';
 import { deleteServiceDocument } from '../../utils/firebase';
+import { getServicesAndDocuments } from '../../utils/firebase';
+import { setServices } from '../../store/services/services.action';
+
+import './service.styles.scss';
 
 function Service({img, id='', title='', shortDetails='', details='', preview=false}) {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [ modalOpen, setModalOpen ] = useState(false);
+  const dispatch = useDispatch();
 
   console.log("montou");
 
@@ -39,9 +43,11 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
       setModalOpen(false);
     }
 
-    const onConfirm = () => {
+    const onConfirm = async () => {
+      await deleteServiceDocument(id);
       setModalOpen(false);
-      console.log("deletou")
+      const allServices = await getServicesAndDocuments();
+      dispatch(setServices(allServices));
     }
 
     return(
@@ -64,19 +70,6 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
     );
   }
 
-  // useEffect(() => {
-  //   const checkIfServiceIsDeleted = async () => {
-  //     if(confirmDelete) {
-  //       // await deleteServiceDocument(id);
-  //       setConfirmDelete(false);
-  //       setModalOpen(false);
-  //       console.log("deletou")
-  //     } 
-  //   }
-  
-  //   checkIfServiceIsDeleted();
-  // }, [confirmDelete]);
-  
   return (
     <li className='service'>
       <div className='service-left-container'>

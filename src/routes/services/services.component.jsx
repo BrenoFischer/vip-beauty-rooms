@@ -1,20 +1,15 @@
-import { useContext, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline } from 'react-icons/md';
 
-import { ServicesContext } from '../../context/services.context';
-
 import Service from '../../components/service/service.component';
+import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
 
 import './services.styles.scss';
-import SERVICES from '../../servicesData';
-import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
 
 function Services() {
   const currentUser = useSelector((state) => state.user.currentUser);
-  // const { services } = useContext(ServicesContext);
-  const services = [SERVICES];
+  const services = useSelector((state) => state.services.services);
 
   return (
     <> 
@@ -35,12 +30,12 @@ function Services() {
           }
         </div>
         <ul className='services__list'>
-          { !services[0] ? 
+          { !services ? 
             <div>
               <LoadingSpinner />
             </div>
           :        
-            services[0].map((service) => 
+            services.map((service) => 
                 <Service 
                   key={service.id}
                   id={service.id}
