@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { v4 } from 'uuid';
@@ -8,6 +8,7 @@ import { editServiceDocument, uploadImageToStorage } from '../../utils/firebase'
 import Footer from '../../components/footer/footer.component';
 import ServiceForm from '../../components/serviceForm/serviceForm.component';
 import './editService.styles.scss';
+import BoxMessage from '../../components/boxMessage/boxMessage.component';
 
 const EditService = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
@@ -23,6 +24,7 @@ const EditService = () => {
     const [ formFields, setFormFields ] = useState(defaultFormFields);
     const { title, details, shortDetails } = formFields;
     const [ loading, setLoading ] = useState(false);
+    const [ messageBox, setMessageBox ] = useState(false);
     const [ imgUrlPreview, setImgUrlPreview ] = useState(img);
     const [ imgUpload, setImgUpload ] = useState(null);
 
@@ -58,6 +60,8 @@ const EditService = () => {
         
         await editServiceDocument(id, data);
         setLoading(false);
+        setMessageBox(true);
+        setTimeout(() => setMessageBox(false), 10000);
     }
 
     return(
@@ -76,6 +80,15 @@ const EditService = () => {
                         imgUrlPreview={imgUrlPreview}
                         buttonTitle="Edit service"
                     />
+                    { messageBox &&
+                        <BoxMessage 
+                            setMessageBox={setMessageBox}
+                            messageSuccessTitle="Service edited"
+                            messageSuccessText="This service information was edited with success"
+                            messageErrorTitle="Error!"
+                            messageErrorText="An error ocurred while editing service"
+                        />
+                    }
                 </div>
             :
             <div>

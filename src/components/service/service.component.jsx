@@ -125,7 +125,7 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
       }
       { modalOpen && 
           <Modal />
-       }
+      }
     </li>
   );
 }

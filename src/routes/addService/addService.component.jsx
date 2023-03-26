@@ -8,6 +8,7 @@ import Footer from '../../components/footer/footer.component';
 import ServiceForm from '../../components/serviceForm/serviceForm.component';
 
 import './addService.styles.scss';
+import BoxMessage from '../../components/boxMessage/boxMessage.component';
 
 const defaultFormFields = {
     details: '',
@@ -20,6 +21,7 @@ const AddService = () => {
   
     const [ formFields, setFormFields ] = useState(defaultFormFields);
     const { details, title, shortDetails } = formFields;
+    const [ messageBox, setMessageBox ] = useState(false);
     const [ imageUpload, setImageUpload ] = useState(null);
     const [ loading, setLoading ] = useState(false);
     const [ imgUrlPreview, setImgUrlPreview ] = useState('https://firebasestorage.googleapis.com/v0/b/unique-beauty-87701.appspot.com/o/services%2Flogo.jpg?alt=media&token=99bfc6b8-ec74-4c84-8e93-cd06722108fa');
@@ -64,6 +66,9 @@ const AddService = () => {
 
       setFormFields(defaultFormFields);
       setLoading(false);
+
+      setMessageBox(true);
+      setTimeout(() => setMessageBox(false), 10000);
     }
 
 
@@ -84,6 +89,15 @@ const AddService = () => {
               formFields={formFields}
               buttonTitle="Add service"
             />
+            { messageBox &&
+              <BoxMessage 
+                setMessageBox={setMessageBox}
+                messageSuccessTitle="Service included"
+                messageSuccessText="The service was added with success!"
+                messageErrorTitle="Error!"
+                messageErrorText="An error has ocurred while adding service"
+              />
+            }
           </div>
         :
           <div>

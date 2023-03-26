@@ -34,18 +34,23 @@ function Services() {
             <div>
               <LoadingSpinner />
             </div>
-          :        
-            services.map((service) => 
-                <Service 
-                  key={service.id}
-                  id={service.id}
-                  img={service.imgUrl}
-                  alt={service.alt}
-                  title={service.title}
-                  details={service.details}
-                  shortDetails={service.shortDetails}
-                />
-              )
+          :
+            services.length === 0 ?
+              <div>
+                <LoadingSpinner />
+              </div>
+            :
+              services.map((service) => 
+                  <Service 
+                    key={service.id}
+                    id={service.id}
+                    img={service.imgUrl}
+                    alt={service.alt}
+                    title={service.title}
+                    details={service.details}
+                    shortDetails={service.shortDetails}
+                  />
+                )
           }
         </ul>
       </main>

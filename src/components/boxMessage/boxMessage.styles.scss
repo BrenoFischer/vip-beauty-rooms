@@ -1,0 +1,71 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+$message-box-padding-horizontal: 5rem;
+$message-box-padding-vertical: 10rem;
+
+.message-box {
+    position: fixed;
+    top: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: $message-box-padding-horizontal $message-box-padding-vertical;
+    background-color: $yellowish-white;
+    border: solid 3px $secondary-color;
+    box-shadow: rgba(18, 30, 39, 0.6) 10px 10px;
+
+    @include respond(tab-land) {
+        padding: 3rem 4rem;
+    }
+    
+    &__wrap {
+        display: flex;
+
+        @include respond(tab-land) {
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+    &__exit {
+        cursor: pointer;
+        position: absolute;
+        font-size: 2.4rem;
+        top: .5rem;
+        right: .5rem;
+    }
+
+    &__icon-box {
+        font-size: 4rem;
+        margin-right: 3rem;
+        color: green;
+        display: flex;
+    }
+
+    &__icon-box-error {
+        font-size: 4rem;
+        margin-right: 3rem;
+        color: red;
+        display: flex;
+    }
+
+    &__text-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__title {
+        font-size: 2rem;
+        color: green;
+    }
+
+    &__title-error {
+        font-size: 2rem;
+        color: red;
+    }
+}
