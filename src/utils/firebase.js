@@ -108,6 +108,20 @@ export const deleteServiceDocument = async (id) => {
 }
 
 
+//get the opening hours, for all days of the week
+export const getOpeningHoursDocuments = async () => {
+  const collectionRef = collection(db, 'openingHours');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const openingHours = querySnapshot.docs.map(docSnapshot => {
+    return { title: docSnapshot.id, items: docSnapshot.data() };
+  });
+  return openingHours;
+}
+
+
 //authenticate with email and password given
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if(!email || !password) return;

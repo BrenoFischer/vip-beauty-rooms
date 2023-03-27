@@ -5,8 +5,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Services from '../services/services.component';
 import Footer from '../../components/footer/footer.component';
 
-import { getServicesAndDocuments } from "../../utils/firebase";
+import { getServicesAndDocuments, getOpeningHoursDocuments } from "../../utils/firebase";
 import { setServices } from '../../store/services/services.action';
+import { setOpeningHours } from '../../store/openingHours/openingHours.action';
 
 import './home.styles.scss';
 
@@ -15,13 +16,21 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      async function fetchServices() {
-          const allServices = await getServicesAndDocuments();
-      
-          dispatch(setServices(allServices));
-      }
-      
-      fetchServices();
+    async function getOpeningHours() {
+      const currentOpeningHours = await getOpeningHoursDocuments();
+      // console.log(currentOpeningHours);
+
+      dispatch(setOpeningHours(currentOpeningHours));
+    };
+
+    async function fetchServices() {
+        const allServices = await getServicesAndDocuments();
+    
+        dispatch(setServices(allServices));
+    }
+    
+    getOpeningHours();
+    fetchServices();
   }, [dispatch]);
   
 

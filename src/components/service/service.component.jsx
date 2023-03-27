@@ -17,7 +17,7 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
   const [ modalOpen, setModalOpen ] = useState(false);
   const dispatch = useDispatch();
 
-  console.log("montou");
+  // console.log("montou");
 
   const detailsState = {
     service: title,
