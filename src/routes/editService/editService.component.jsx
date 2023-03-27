@@ -9,6 +9,7 @@ import Footer from '../../components/footer/footer.component';
 import ServiceForm from '../../components/serviceForm/serviceForm.component';
 import './editService.styles.scss';
 import BoxMessage from '../../components/boxMessage/boxMessage.component';
+import SignIn from '../signIn/signIn.component';
 
 const EditService = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
@@ -67,6 +68,7 @@ const EditService = () => {
     return(
         <section className='edit-service'>
             { currentUser ?
+            <>
                 <div className='edit-service__container'>
                     <div className='edit-service__title-container'>
                         <h2 className='edit-service__title'>Edit service - <span>{title}</span></h2>
@@ -90,14 +92,11 @@ const EditService = () => {
                         />
                     }
                 </div>
+                <Footer />
+            </>
             :
-            <div>
-                <h2>Sorry, this is an area for Unique Beauty Managers</h2>
-                <p>If you are a manager, please, authenticate yourself before adding a new service. You can do it by clicking on "Log In".</p>
-            </div>
+                <SignIn />
             }
-
-            <Footer />
         </section>
     );
 }
