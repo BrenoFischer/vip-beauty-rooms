@@ -1,10 +1,15 @@
 import './loadingSpinner.styles.scss';
 
-const LoadingSpinner = () => {
+const LoadingSpinner = ({alternativeStyle=false}) => {
     return(
         <div className="spinner-container">
-            <div className="loading-spinner">
-            </div>
+            { alternativeStyle ? 
+                <div className="loading-spinner-alternative">
+                </div>
+            :
+                <div className="loading-spinner">
+                </div>
+            }
         </div>
     );
 }
