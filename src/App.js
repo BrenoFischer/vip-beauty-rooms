@@ -8,6 +8,7 @@ import DetailsPage from './routes/details-page/details-page.component';
 import Home from './routes/home/home.component';
 import Navigation from './routes/navigation/navigation.component';
 import SignIn from './routes/signIn/signIn.component';
+import EditOpeningHours from './routes/editOpeningHours/editOpeningHours.component';
 
 import { onAuthStateChangeListener } from "./utils/firebase";
 import { setCurrentUser } from './store/user/user.action';
@@ -31,6 +32,7 @@ function App() {
         <Route path='sign-in' element={<SignIn />} />
         <Route path='add-service' element={<AddService />} />
         <Route path='edit-service' element={<EditService />} />
+        <Route path='edit-opening-hours' element={<EditOpeningHours />} />
       </Route>
     </Routes>
   );

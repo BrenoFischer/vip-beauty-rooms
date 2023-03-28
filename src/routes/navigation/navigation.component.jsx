@@ -20,7 +20,11 @@ const Navigation = () => {
                     <ul className='nav__links'>
                         <Link className='nav__link' to="/">Services</Link>
                         { currentUser ? (
-                                <span className='nav__link' onClick={signOutUser}>Sign Out</span>
+                                <>
+                                    <Link className='nav__link' to="add-service/">Add Service</Link>
+                                    <Link className='nav__link' to="edit-opening-hours/">Edit Opening Hours</Link>
+                                    <span className='nav__link' onClick={signOutUser}>Sign Out</span>
+                                </>
                             ) :
                             (
                                 <Link className='nav__link' to="sign-in/">Sign In</Link>
