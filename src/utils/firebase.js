@@ -122,6 +122,25 @@ export const getOpeningHoursDocuments = async () => {
 }
 
 
+//change/add fields from a opening hour document, based on doc id and data sent.
+// If data fields are the same from doc, it will be edited, if new fields are passed, it'll be added
+export const editOpeningHourDocument = async (id, data) => {
+  const collectionRef = collection(db, 'openingHours');
+
+  const docRef = getDocument(collectionRef, id);
+
+  await updateDoc(docRef, data);
+}
+
+
+export const editAllOpeningHoursCollection = async (newOpeningHours) => {
+  Object.entries(newOpeningHours).forEach( async (newOpeningHour) => {
+    const [day, data] = newOpeningHour;
+    await editOpeningHourDocument(day, data);
+  });
+}
+
+
 //authenticate with email and password given
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
     if(!email || !password) return;
