@@ -1,0 +1,125 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+
+.edit-opening-hours {
+    &__title--wrapper {
+        text-align: center;
+        margin-top: 8rem;
+    }
+
+    &__title {
+        display: inline-block;
+        font-family: 'Allura', sans-serif;
+        font-size: 8rem;
+        color: $secondary-color;
+        margin-bottom: 2rem;
+    }
+    
+    &__wrapper {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__double-set {
+        display: flex;
+        margin-bottom: 8rem;
+    }
+
+    &__set {
+        margin-right: 5rem;
+    }
+
+    &__set-wrapper {
+        display: flex;
+    }
+
+    &__input-field {
+        position: relative;
+    }
+
+    &__input {
+        margin-top: 2rem;
+        background: none;
+        background-color: $white;
+        color: $secondary-color;
+        font-size: 1.4rem;
+        padding: 2.5rem .5rem .5rem .5rem;
+        display: block;
+        border: none;
+        max-width: 10rem;
+        border-radius: 5px;
+        border-bottom: 2px solid $secondary-color;
+        border-right: 2px solid $secondary-color;
+        resize: none;
+        transition: all .2s;
+
+        &:not(:last-child) {
+            margin-right: 4rem;
+        }
+    
+        &:hover {
+            border-bottom: 2px solid $primary-color;
+            border-right: 2px solid $primary-color;
+        }
+    
+        &:focus {
+            border-bottom: 2px solid $primary-color;
+            border-right: 2px solid $primary-color;
+            outline: none;
+        }
+
+        &-label {
+            color: $primary-color;
+            font-size: 1.2rem;
+            font-weight: 600;
+            position: absolute;
+            pointer-events: none;
+            left: 5px;
+            top: 3rem;
+            transform: translateY(-50%);
+            transition: 300ms ease all;
+        }
+    }
+
+
+    &__button-wrapper {
+        margin: 10rem 0;
+        display: flex;
+        min-height: 5rem;
+    }
+
+
+    &__preview {
+
+        &-title {
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+
+            &:after {
+                content: '';
+                display: block;
+                position: relative;
+                width: 40%;
+                border: 2px solid $primary-color;
+                margin-top: 1rem;
+            }
+        }
+
+        &-list {
+            list-style-type: none;
+            font-family: "Montserrat", "sans-serid";
+            font-weight: 400;
+            font-size: 1.8rem;
+
+            li {
+                margin-top: 1rem;
+            }
+
+            span {
+                color: $primary-color;
+            }
+        }
+    }
+}

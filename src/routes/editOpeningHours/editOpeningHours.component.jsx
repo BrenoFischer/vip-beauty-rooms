@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
 import CustomButton from '../../components/button/button.component';
+import SignIn from '../../routes/signIn/signIn.component';
+import Footer from '../../components/footer/footer.component';
 
 import { selectDaysMap } from '../../store/openingHours/openingHours.selector';
 
@@ -10,11 +12,12 @@ import { getOpeningHoursDocuments, editAllOpeningHoursCollection } from "../../u
 import { setOpeningHours } from '../../store/openingHours/openingHours.action';
 
 import './editOpeningHours.styles.scss';
+import BoxMessage from '../../components/boxMessage/boxMessage.component';
 
 
 const OpeningHoursField = ({value, name, onChange, label}) => {
     return(
-        <>           
+        <div className='edit-opening-hours__input-field'>           
             <input 
                 type="text"
                 list="hours"
@@ -22,8 +25,9 @@ const OpeningHoursField = ({value, name, onChange, label}) => {
                 name={name}
                 value={value}
                 onChange={onChange}
+                className="edit-opening-hours__input"
             />
-            <label>
+            <label className='edit-opening-hours__input-label'>
                 {label}
             </label>
             <datalist id="hours">
@@ -53,52 +57,85 @@ const OpeningHoursField = ({value, name, onChange, label}) => {
                 <option>11PM</option>
                 <option>CLOSED</option>
             </datalist>
-        </>
+        </div>
     );
 }
 
 
 const OpeningHourSet = ({ day, valueOpen, valueClose, nameOpen, nameClose, onChange }) => {
     return(
-        <>
+        <div className='edit-opening-hours__set'>
             <h3>{day}</h3>
-            <OpeningHoursField 
-                value={valueOpen}
-                name={nameOpen}
-                onChange={onChange}
-                label="Open"
-            />
-            <OpeningHoursField 
-                value={valueClose}
-                name={nameClose}
-                onChange={onChange}
-                label="Close"
-            />
-        </>
+            <div className='edit-opening-hours__set-wrapper'>
+                <OpeningHoursField 
+                    value={valueOpen}
+                    name={nameOpen}
+                    onChange={onChange}
+                    label="Open"
+                />
+                <OpeningHoursField 
+                    value={valueClose}
+                    name={nameClose}
+                    onChange={onChange}
+                    label="Close"
+                />
+            </div>
+        </div>
     );
 }
+
+
+
+const OpeningHoursDoubleSet = ({day1, day2, valueOpen1, valueOpen2, valueClose1, valueClose2, nameOpen1, nameOpen2, nameClose1, nameClose2, onChange}) => {
+    return(
+        <div className='edit-opening-hours__double-set'>
+            <OpeningHourSet 
+                day={day1}
+                valueOpen={valueOpen1}
+                valueClose={valueClose1}
+                nameOpen={nameOpen1}
+                nameClose={nameClose1}
+                onChange={onChange}
+            />
+            <OpeningHourSet 
+                day={day2}
+                valueOpen={valueOpen2}
+                valueClose={valueClose2}
+                nameOpen={nameOpen2}
+                nameClose={nameClose2}
+                onChange={onChange}
+            />
+        </div>
+    );
+}
+
+
+const defaultFormFields = {
+    mondayFieldOpen: "",
+    mondayFieldClose: "",
+    tuesdayFieldOpen: "",
+    tuesdayFieldClose: "",
+    wednesdayFieldOpen: "",
+    wednesdayFieldClose: "",
+    thursdayFieldOpen: "",
+    thursdayFieldClose: "",
+    fridayFieldOpen: "",
+    fridayFieldClose: "",
+    saturdayFieldOpen: "",
+    saturdayFieldClose: "",
+    sundayFieldOpen: "",
+    sundayFieldClose: ""
+}
+
 
 const EditOpeningHours = () => {
     const dispatch = useDispatch();
 
     const openingHours = useSelector(selectDaysMap);
+    const currentUser = useSelector((state) => state.user.currentUser);
 
-    let defaultFormFields = {
-        mondayFieldOpen: "",
-        mondayFieldClose: "",
-        tuesdayFieldOpen: "",
-        tuesdayFieldClose: "",
-        wednesdayFieldOpen: "",
-        wednesdayFieldClose: "",
-        thursdayFieldOpen: "",
-        thursdayFieldClose: "",
-        fridayFieldOpen: "",
-        fridayFieldClose: "",
-        saturdayFieldOpen: "",
-        saturdayFieldClose: "",
-        sundayFieldOpen: "",
-        sundayFieldClose: ""
-    }
+    const [ messageBox, setMessageBox ] = useState(false);
+    const [ loading, setLoading ] = useState(false);
 
     const [ formFields, setFormFields ] = useState(defaultFormFields);
     const { 
@@ -172,90 +209,115 @@ const EditOpeningHours = () => {
 
     const editOpeningHours = async (event) => {
         event.preventDefault();
+        setLoading(true);
 
         const newOpeningHours = createOpeningHoursObject();
 
         await editAllOpeningHoursCollection(newOpeningHours);
+        
+        setLoading(false);
+        setMessageBox(true);
+        setTimeout(() => setMessageBox(false), 10000);
     }
 
     console.log("Component Mount");
 
     return(
         <section>
-            <h2>Edit Opening Hours</h2>
-            { Object.keys(openingHours).length !== 0 ?
-                <ul className='footer__schedule-list'>
-                    <li>Monday - {mondayFieldOpen} to {mondayFieldClose}</li>
-                    <li>Tuesday - {tuesdayFieldOpen} to {tuesdayFieldClose}</li>
-                    <li>Wednesday - {wednesdayFieldOpen} to {wednesdayFieldClose}</li>
-                    <li>Thursday - {thursdayFieldOpen} to {thursdayFieldClose}</li>
-                    <li>Friday - {fridayFieldOpen} to {fridayFieldClose}</li>
-                    <li>Saturday - {saturdayFieldOpen} to {saturdayFieldClose}</li>
-                    <li>Sunday - {sundayFieldOpen} to {sundayFieldClose}</li>
-                </ul>
-            :
-                <LoadingSpinner />
-            }
+            { currentUser ?
+                <div className='edit-opening-hours'>
+                    <div className='edit-opening-hours__title--wrapper'>
+                        <h2 className='edit-opening-hours__title'>Edit Opening Hours</h2>
+                    </div>
+                    <div className='edit-opening-hours__wrapper'>                       
+                        <form onSubmit={editOpeningHours}>
+                            <OpeningHoursDoubleSet 
+                                    day1="Monday"
+                                    valueOpen1={mondayFieldOpen}
+                                    valueClose1={mondayFieldClose}
+                                    nameOpen1="mondayFieldOpen"
+                                    nameClose1="mondayFieldClose"
+                                    day2="Tuesday"
+                                    valueOpen2={tuesdayFieldOpen}
+                                    valueClose2={tuesdayFieldClose}
+                                    nameOpen2="tuesdayFieldOpen"
+                                    nameClose2="tuesdayFieldClose"
+                                    onChange={handleInputChange}  
+                            />
+                            <OpeningHoursDoubleSet 
+                                    day1="Wednesday"
+                                    valueOpen1={wednesdayFieldOpen}
+                                    valueClose1={wednesdayFieldClose}
+                                    nameOpen1="wednesdayFieldOpen"
+                                    nameClose1="wednesdayFieldClose"
+                                    day2="Thursday"
+                                    valueOpen2={thursdayFieldOpen}
+                                    valueClose2={thursdayFieldClose}
+                                    nameOpen2="thursdayFieldOpen"
+                                    nameClose2="thursdayFieldClose"
+                                    onChange={handleInputChange}  
+                            />
+                            <OpeningHoursDoubleSet 
+                                day1="Friday"
+                                valueOpen1={fridayFieldOpen}
+                                valueClose1={fridayFieldClose}
+                                nameOpen1="fridayFieldOpen"
+                                nameClose1="fridayFieldClose"
+                                day2="Saturday"
+                                valueOpen2={saturdayFieldOpen}
+                                valueClose2={saturdayFieldClose}
+                                nameOpen2="saturdayFieldOpen"
+                                nameClose2="saturdayFieldClose"
+                                onChange={handleInputChange}  
+                            />
+                            <OpeningHourSet 
+                                day="Sunday"
+                                valueOpen={sundayFieldOpen}
+                                valueClose={sundayFieldClose}
+                                nameOpen="sundayFieldOpen"
+                                nameClose="sundayFieldClose"
+                                onChange={handleInputChange}  
+                            />
+                            <div className='edit-opening-hours__button-wrapper'>
+                                <CustomButton buttonText="Edit Opening Hours" type='submit' />
+                                { loading &&
+                                    <LoadingSpinner />
+                                }
+                            </div>
+      
+                            { messageBox &&
+                                <BoxMessage 
+                                    setMessageBox={setMessageBox}
+                                    messageSuccessTitle="Opening Hours modified"
+                                    messageSuccessText="The Opening hours were edited with success"
+                                    messageErrorTitle="Error!"
+                                    messageErrorText="An error has ocurred while editing the Opening Hours"
+                                />
+                            }
+                        </form>
 
-            <form onSubmit={editOpeningHours}>
-                <OpeningHourSet 
-                    day="Monday"
-                    valueOpen={mondayFieldOpen}
-                    valueClose={mondayFieldClose}
-                    nameOpen="mondayFieldOpen"
-                    nameClose="mondayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <OpeningHourSet 
-                    day="Tuesday"
-                    valueOpen={tuesdayFieldOpen}
-                    valueClose={tuesdayFieldClose}
-                    nameOpen="tuesdayFieldOpen"
-                    nameClose="tuesdayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <OpeningHourSet 
-                    day="Wednesday"
-                    valueOpen={wednesdayFieldOpen}
-                    valueClose={wednesdayFieldClose}
-                    nameOpen="wednesdayFieldOpen"
-                    nameClose="wednesdayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <OpeningHourSet 
-                    day="Thursday"
-                    valueOpen={thursdayFieldOpen}
-                    valueClose={thursdayFieldClose}
-                    nameOpen="thursdayFieldOpen"
-                    nameClose="thursdayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <OpeningHourSet 
-                    day="Friday"
-                    valueOpen={fridayFieldOpen}
-                    valueClose={fridayFieldClose}
-                    nameOpen="fridayFieldOpen"
-                    nameClose="fridayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <OpeningHourSet 
-                    day="Saturday"
-                    valueOpen={saturdayFieldOpen}
-                    valueClose={saturdayFieldClose}
-                    nameOpen="saturdayFieldOpen"
-                    nameClose="saturdayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <OpeningHourSet 
-                    day="Sunday"
-                    valueOpen={sundayFieldOpen}
-                    valueClose={sundayFieldClose}
-                    nameOpen="sundayFieldOpen"
-                    nameClose="sundayFieldClose"
-                    onChange={handleInputChange}  
-                />
-                <CustomButton buttonText="Edit Opening Hours" type='submit' />
-            </form>
+                        { Object.keys(openingHours).length !== 0 ?
+                            <div className='edit-opening-hours__preview'>
+                            <h3 className='edit-opening-hours__preview-title'>Opening hours preview</h3>
+                                <ul className='edit-opening-hours__preview-list'>
+                                    <li><span>Monday</span> - {mondayFieldOpen} to {mondayFieldClose}</li>
+                                    <li><span>Tuesday</span> - {tuesdayFieldOpen} to {tuesdayFieldClose}</li>
+                                    <li><span>Wednesday</span> - {wednesdayFieldOpen} to {wednesdayFieldClose}</li>
+                                    <li><span>Thursday</span> - {thursdayFieldOpen} to {thursdayFieldClose}</li>
+                                    <li><span>Friday</span> - {fridayFieldOpen} to {fridayFieldClose}</li>
+                                    <li><span>Saturday</span> - {saturdayFieldOpen} to {saturdayFieldClose}</li>
+                                    <li><span>Sunday</span> - {sundayFieldOpen} to {sundayFieldClose}</li>
+                                </ul>
+                            </div>
+                        :
+                            <LoadingSpinner />
+                        }
+                    </div>      
+                    <Footer />          
+                </div>
+            :
+                <SignIn />
+            }
         </section>
     );
 }

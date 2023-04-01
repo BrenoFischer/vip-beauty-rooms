@@ -6,10 +6,10 @@ import { uploadImageToStorage, addCollectionAndDocuments } from '../../utils/fir
 
 import Footer from '../../components/footer/footer.component';
 import ServiceForm from '../../components/serviceForm/serviceForm.component';
-
-import './addService.styles.scss';
 import BoxMessage from '../../components/boxMessage/boxMessage.component';
 import SignIn from '../signIn/signIn.component';
+
+import './addService.styles.scss';
 
 const defaultFormFields = {
     details: '',
