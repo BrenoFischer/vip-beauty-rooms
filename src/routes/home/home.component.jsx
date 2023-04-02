@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import Services from '../services/services.component';
 import Footer from '../../components/footer/footer.component';
+import Posts from '../posts/posts.component';
 
 import { getServicesAndDocuments, getOpeningHoursDocuments } from "../../utils/firebase";
 import { setServices } from '../../store/services/services.action';
@@ -44,7 +45,7 @@ function Home() {
 
   return (
     <>
-      <div className='icon-container' onClick={() => scrollToServices(servicesRef)}>
+      {/* <div className='icon-container' onClick={() => scrollToServices(servicesRef)}>
         <ExpandMoreIcon sx={{
           fontSize: '16rem',
           fontWeight: '100',
@@ -56,8 +57,9 @@ function Home() {
           }
         }}
         />
-      </div>
+      </div> */}
       <div ref={servicesRef}></div>
+      <Posts />
       <Services />
       <Footer />
     </>

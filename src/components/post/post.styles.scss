@@ -1,0 +1,50 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $secondary-color;
+    min-height: 50rem;
+    padding: 6rem 0;
+
+    &__image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    &__image {
+        max-height: 30rem;
+        border-radius: 10px;
+    }
+
+    &__description {
+        // color: $secondary-color;
+        color: $white;
+        margin-left: 20rem;
+        margin-top: 4rem;
+    }
+
+    &__title {
+        display: inline-block;
+        font-size: 4rem;
+        font-family: "Belleza", sans-serif;
+
+        &:after {
+            content: '';
+            display: block;
+            position: relative;
+            width: 100%;
+            border: 2px solid $primary-color;
+            margin-top: 1rem;
+        }
+    }
+
+    &__text {
+        font-family: "Montserrat", sans-serif;
+        margin-top: 2rem;
+        font-size: 1.4rem;
+    }
+}
