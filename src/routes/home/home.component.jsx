@@ -6,10 +6,8 @@ import Services from '../services/services.component';
 import Footer from '../../components/footer/footer.component';
 import Posts from '../posts/posts.component';
 
-import { getServicesAndDocuments, getOpeningHoursDocuments, getPostsAndDocuments } from "../../utils/firebase";
-import { setServices } from '../../store/services/services.action';
+import { getOpeningHoursDocuments } from "../../utils/firebase";
 import { setOpeningHours } from '../../store/openingHours/openingHours.action';
-import { setPosts } from '../../store/posts/posts.action';
 
 import './home.styles.scss';
 
@@ -20,26 +18,11 @@ function Home() {
   useEffect(() => {
     async function getOpeningHours() {
       const currentOpeningHours = await getOpeningHoursDocuments();
-      // console.log(currentOpeningHours);
 
       dispatch(setOpeningHours(currentOpeningHours));
     };
 
-    async function fetchServices() {
-        const allServices = await getServicesAndDocuments();
-    
-        dispatch(setServices(allServices));
-    }
-
-    async function fetchPosts() {
-      const allPosts = await getPostsAndDocuments();
-  
-      dispatch(setPosts(allPosts));
-  }
-    
     getOpeningHours();
-    fetchServices();
-    fetchPosts();
   }, [dispatch]);
   
 

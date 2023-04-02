@@ -1,15 +1,32 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { MdAddCircleOutline } from 'react-icons/md';
 
 import Service from '../../components/service/service.component';
 import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
 
+import { getServicesAndDocuments } from "../../utils/firebase";
+import { setServices } from '../../store/services/services.action';
+
 import './services.styles.scss';
+
 
 function Services() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const services = useSelector((state) => state.services.services);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    async function fetchServices() {
+        const allServices = await getServicesAndDocuments();
+    
+        dispatch(setServices(allServices));
+    }
+    
+    fetchServices();
+  }, [dispatch]);
 
   return (
     <> 

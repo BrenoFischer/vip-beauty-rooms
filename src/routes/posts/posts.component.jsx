@@ -1,4 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { getPostsAndDocuments } from "../../utils/firebase";
+import { setPosts } from '../../store/posts/posts.action';
 
 import { MdAddCircleOutline } from 'react-icons/md';
 
@@ -18,6 +22,18 @@ import './posts.styles.scss';
 const Posts = () => {
     const currentUser = useSelector((state) => state.user.currentUser);
     const posts = useSelector((state) => state.posts.posts);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        async function fetchPosts() {
+        const allPosts = await getPostsAndDocuments();
+    
+        dispatch(setPosts(allPosts));
+        }
+        
+        fetchPosts();
+    }, [dispatch]);
 
     return (
         <div className='posts'>

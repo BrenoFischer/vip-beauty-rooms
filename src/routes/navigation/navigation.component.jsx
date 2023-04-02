@@ -14,11 +14,14 @@ const Navigation = () => {
         <>
             <nav className='nav'>
                 <div className='nav__img-container'>
-                    <img className='nav__img' src={logo} alt="Logo" />
+                    <Link to='/'>
+                        <img className='nav__img' src={logo} alt="Logo" />
+                    </Link>
                 </div>
                 <div className='nav__links-container'>
                     <ul className='nav__links'>
-                        <Link className='nav__link' to="/">Services</Link>
+                        <Link className='nav__link' to="posts/">Posts</Link>
+                        <Link className='nav__link' to="services/">Services</Link>
                         { currentUser ? (
                                 <>
                                     <Link className='nav__link' to="add-service/">Add Service</Link>
@@ -27,6 +30,7 @@ const Navigation = () => {
                                 </>
                             ) :
                             (
+                                
                                 <Link className='nav__link' to="sign-in/">Sign In</Link>
                             )
 

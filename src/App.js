@@ -13,6 +13,8 @@ import EditOpeningHours from './routes/editOpeningHours/editOpeningHours.compone
 import { onAuthStateChangeListener } from "./utils/firebase";
 import { setCurrentUser } from './store/user/user.action';
 import AddPost from './routes/addPost/addPost.component';
+import ServicesPage from './routes/servicesPage/servicesPage.component';
+import PostsPage from './routes/postsPage/postsPage.component';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +37,8 @@ function App() {
         <Route path='edit-service' element={<EditService />} />
         <Route path='edit-opening-hours' element={<EditOpeningHours />} />
         <Route path='add-post' element={<AddPost />} />
+        <Route path='services' element={<ServicesPage />} />
+        <Route path='posts' element={<PostsPage />} />
       </Route>
     </Routes>
   );
