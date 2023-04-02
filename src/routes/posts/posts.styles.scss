@@ -1,6 +1,7 @@
+@import '../../sassStyles/variables';
 
 .posts {
-    margin-top: 15rem;
+    margin-top: 5rem;
 
     &__title-container {
         text-align: center;
@@ -15,5 +16,39 @@
     &__title {
         font-family: 'Allura', sans-serif;
         font-size: 10rem;
+    }
+}
+
+
+.add-post {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+
+    &:hover .add-post__tooltip {
+        visibility: visible;
+    }
+
+    &__icon {
+        margin-left: 3rem;
+        position: absolute;
+        font-size: 6rem;
+        color: $primary-color;
+    }
+
+    &__tooltip {
+        visibility: hidden;
+        padding: 1rem;
+        min-width: 15rem;
+        position: absolute;
+        left: 10rem;
+        background-color: $yellowish-white;
+        border-radius: 5px;
+        transform: translateY(40%);
+
+        &-text {
+            font-size: 1.5rem;
+            text-align: left;
+        }
     }
 }

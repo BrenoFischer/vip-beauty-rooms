@@ -87,6 +87,18 @@ export const getServicesAndDocuments = async () => {
 }
 
 
+//returns all documents from the posts collection inside firestore
+export const getPostsAndDocuments = async () => {
+  const collectionRef = collection(db, 'posts');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const posts = querySnapshot.docs.map(doc => doc.data());
+  return posts
+}
+
+
 //change/add fields from a service document, based on doc id and data sent.
 // If data fields are the same from doc, it will be edited, if new fields are passed, it'll be added
 export const editServiceDocument = async (id, data) => {
@@ -101,6 +113,16 @@ export const editServiceDocument = async (id, data) => {
 //delete a service document based on its id
 export const deleteServiceDocument = async (id) => {
   const collectionRef = collection(db, 'services');
+
+  const docRef = getDocument(collectionRef, id);
+
+  await deleteDoc(docRef);
+}
+
+
+//delete a post document based on its id
+export const deletePostDocument = async (id) => {
+  const collectionRef = collection(db, 'posts');
 
   const docRef = getDocument(collectionRef, id);
 

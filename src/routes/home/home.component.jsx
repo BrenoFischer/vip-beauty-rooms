@@ -6,9 +6,10 @@ import Services from '../services/services.component';
 import Footer from '../../components/footer/footer.component';
 import Posts from '../posts/posts.component';
 
-import { getServicesAndDocuments, getOpeningHoursDocuments } from "../../utils/firebase";
+import { getServicesAndDocuments, getOpeningHoursDocuments, getPostsAndDocuments } from "../../utils/firebase";
 import { setServices } from '../../store/services/services.action';
 import { setOpeningHours } from '../../store/openingHours/openingHours.action';
+import { setPosts } from '../../store/posts/posts.action';
 
 import './home.styles.scss';
 
@@ -29,9 +30,16 @@ function Home() {
     
         dispatch(setServices(allServices));
     }
+
+    async function fetchPosts() {
+      const allPosts = await getPostsAndDocuments();
+  
+      dispatch(setPosts(allPosts));
+  }
     
     getOpeningHours();
     fetchServices();
+    fetchPosts();
   }, [dispatch]);
   
 

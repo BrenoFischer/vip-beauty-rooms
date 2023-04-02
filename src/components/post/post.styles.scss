@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: $secondary-color;
+    // background-color: $secondary-color;
     min-height: 50rem;
     padding: 6rem 0;
 
@@ -16,14 +16,14 @@
     }
     
     &__image {
-        max-height: 30rem;
+        max-height: 35rem;
         border-radius: 10px;
     }
 
     &__description {
         // color: $secondary-color;
-        color: $white;
-        margin-left: 20rem;
+        // color: $white;
+        margin-left: 15rem;
         margin-top: 4rem;
     }
 
@@ -46,5 +46,28 @@
         font-family: "Montserrat", sans-serif;
         margin-top: 2rem;
         font-size: 1.4rem;
+        white-space: pre-line;
+        line-height: 2rem;
+    }
+
+    .actions-container {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        
+        background-color: $secondary-color;
+        color: $primary-color;
+        font-size: 3rem;
+        border-radius: 15px;
+
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .delete-container {
+        display: flex;
+        cursor: pointer;
     }
 }

@@ -1,7 +1,59 @@
+import { useState } from 'react';
+import { AiOutlineDelete } from 'react-icons/ai';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import { deletePostDocument, getPostsAndDocuments } from '../../utils/firebase';
+
+import CustomButton from '../button/button.component';
 
 import './post.styles.scss';
+import { setPosts } from '../../store/posts/posts.action';
 
-const Post = ({title, text, img}) => {
+const Post = ({title, text, img, id}) => {
+    const currentUser = useSelector((state) => state.user.currentUser);
+    const [ modalOpen, setModalOpen ] = useState(false);
+    const dispatch = useDispatch();
+
+
+    const deletePost = () => {
+        setModalOpen(true);
+      }
+    
+    
+      const Modal = () => {
+        const onCancel = () => {
+          setModalOpen(false);
+        }
+    
+        const onConfirm = async () => {
+          await deletePostDocument(id);
+          setModalOpen(false);
+          const allPosts = await getPostsAndDocuments();
+          dispatch(setPosts(allPosts));
+        }
+    
+        return(
+          <div className='modal'>
+            <h2 className='modal__title'>Are you sure you want to delete this post?</h2>
+            <div className='modal__buttons-container'>
+              <div className='modal__button-wrapper'>
+                <CustomButton 
+                  buttonText="Yes"
+                  onClickAction={onConfirm}
+                />
+              </div>
+              <CustomButton 
+                buttonText="No"
+                secondaryStyle={true}
+                onClickAction={onCancel}
+              />
+            </div>
+          </div>
+        );
+    }
+
+
     return(
         <div className='post'>
             <div className='post__image-container'>
@@ -11,6 +63,16 @@ const Post = ({title, text, img}) => {
                 <h2 className='post__title'>{title}</h2>
                 <p className='post__text'>{text}</p>
             </div>
+            { currentUser &&
+                <div className='actions-container'>
+                    <div className='delete-container' onClick={deletePost}>
+                        <AiOutlineDelete />
+                    </div>
+                </div>
+            }
+            { modalOpen && 
+                <Modal />
+            }
         </div>
     );
 }
