@@ -298,7 +298,7 @@ const EditOpeningHours = () => {
 
                         { Object.keys(openingHours).length !== 0 ?
                             <div className='edit-opening-hours__preview'>
-                            <h3 className='edit-opening-hours__preview-title'>Opening hours preview</h3>
+                                <h3 className='edit-opening-hours__preview-title'>Opening hours preview</h3>
                                 <ul className='edit-opening-hours__preview-list'>
                                     <li><span>Monday</span> - {mondayFieldOpen} to {mondayFieldClose}</li>
                                     <li><span>Tuesday</span> - {tuesdayFieldOpen} to {tuesdayFieldClose}</li>

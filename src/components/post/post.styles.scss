@@ -5,9 +5,10 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // background-color: $secondary-color;
+    align-items: center;
     min-height: 50rem;
     padding: 6rem 0;
+    position: relative;
 
     &__image-container {
         display: flex;
@@ -17,15 +18,18 @@
     
     &__image {
         max-height: 35rem;
+        max-width: 60rem;
         border-radius: 10px;
+
+        @include respond(tab-land) {
+            max-width: 40rem;
+        }
     }
 
-    &__description {
-        // color: $secondary-color;
-        // color: $white;
-        margin-left: 15rem;
-        margin-top: 4rem;
+    &__title-wrapper {
+        margin-bottom: 4rem;
     }
+
 
     &__title {
         display: inline-block;
@@ -35,10 +39,19 @@
         &:after {
             content: '';
             display: block;
-            position: relative;
+            // position: relative;
             width: 100%;
             border: 2px solid $primary-color;
             margin-top: 1rem;
+        }
+    }
+
+
+    &__description {
+        margin-top: 4rem;
+
+        @include respond(tab-land) {
+            margin: 0 10rem;
         }
     }
 

@@ -97,6 +97,7 @@ $navPadding: 3rem;
         position: absolute;
         top: calc($navBarHeightPhone + 2*$navPadding - 10%);
         left: 0;
+        width: 100%;
         background-color: $secondary-color;
         padding: 3rem;
 

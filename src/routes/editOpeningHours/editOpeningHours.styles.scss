@@ -19,11 +19,22 @@
     &__wrapper {
         display: flex;
         justify-content: space-around;
+
+        @include respond(tab-land) {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     }
 
     &__double-set {
         display: flex;
         margin-bottom: 8rem;
+
+        @include respond(tab-land) {
+            flex-direction: column;
+            margin-bottom: 0;
+        }
     }
 
     &__set {
@@ -32,6 +43,10 @@
 
     &__set-wrapper {
         display: flex;
+
+        @include respond(tab-land) {
+            margin-bottom: 5rem;
+        }
     }
 
     &__input-field {
@@ -91,6 +106,9 @@
 
 
     &__preview {
+        @include respond(tab-land) {
+            margin-bottom: 10rem;
+        }
 
         &-title {
             font-size: 3rem;

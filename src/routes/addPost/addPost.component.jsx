@@ -141,6 +141,7 @@ const AddPost = () => {
                         img={imgUrlPreview}
                         title={title}
                         text={text}
+                        preview={true}
                     />
                   </div>
                 </div>

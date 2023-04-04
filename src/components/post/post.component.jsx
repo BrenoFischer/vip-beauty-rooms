@@ -3,14 +3,14 @@ import { AiOutlineDelete } from 'react-icons/ai';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { setPosts } from '../../store/posts/posts.action';
 import { deletePostDocument, getPostsAndDocuments } from '../../utils/firebase';
 
 import CustomButton from '../button/button.component';
 
 import './post.styles.scss';
-import { setPosts } from '../../store/posts/posts.action';
 
-const Post = ({title, text, img, id}) => {
+const Post = ({title, text, img, id, preview=false}) => {
     const currentUser = useSelector((state) => state.user.currentUser);
     const [ modalOpen, setModalOpen ] = useState(false);
     const dispatch = useDispatch();
@@ -56,14 +56,17 @@ const Post = ({title, text, img, id}) => {
 
     return(
         <div className='post'>
+            <div className='post__title-wrapper'>
+              <h2 className='post__title'>{title}</h2>
+            </div>
             <div className='post__image-container'>
                 <img className='post__image' src={img} alt={title} />
             </div>
             <div className='post__description'>
-                <h2 className='post__title'>{title}</h2>
+                {/* <h2 className='post__title'>{title}</h2> */}
                 <p className='post__text'>{text}</p>
             </div>
-            { currentUser &&
+            { currentUser && !preview &&
                 <div className='actions-container'>
                     <div className='delete-container' onClick={deletePost}>
                         <AiOutlineDelete />
