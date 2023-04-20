@@ -61,34 +61,27 @@ const Posts = () => {
                     navigation
                     pagination={{ clickable: true }}
                 >
-                    {/* <SwiperSlide>
-                        <Post 
-                            img="https://firebasestorage.googleapis.com/v0/b/unique-beauty-87701.appspot.com/o/posts%2Fwe-are-hiring.png?alt=media&token=4492a36b-95a5-400b-a087-41d4a0ac0873"
-                            text="Looking for qualified eyelashes and threading and Waxing person, three days a week work"
-                            title="We are hiring!"
-                        />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <Post 
-                            img="https://firebasestorage.googleapis.com/v0/b/unique-beauty-87701.appspot.com/o/posts%2Fnails1.jpg?alt=media&token=89a848e5-78b6-486d-8546-1852db010227"
-                            text='Full set of gel nail extensions...&#10;Done by molly&#10;Pop in for appointment only 35.00 euro'
-                            title="Gel Nail Extensions"
-                        />
-                    </SwiperSlide> */}
-                    { posts.map(post => {
-                        const { imgUrl, text, title, id } = post;
+                    { Object.keys(posts).length === 0 ?
+                        <div className='posts__no-news'>
+                            <h2 className='posts__no-news-title'>No recent news</h2>
+                            <p className='posts__no-news-paragraph'>Take a look at our <span>Services</span> and prices below!</p>
+                            <p className='posts__no-news-paragraph'>Also make sure to follow us on <Link className='posts__no-news-paragraph--face' to='https://www.facebook.com/profile.php?id=100089288214240'>Facebook</Link> and <Link className='posts__no-news-paragraph--insta' to='https://www.instagram.com/uniquebeautylimerick/'>Instagram </Link></p>
+                        </div> 
+                    :
+                        posts.map(post => {
+                            const { imgUrl, text, title, id } = post;
 
-                        return(
-                            <SwiperSlide key={id}>
-                                <Post 
-                                    id={id}
-                                    img={imgUrl}
-                                    text={text}
-                                    title={title}
-                                />
-                            </SwiperSlide>
-                        )
-                    })
+                            return(
+                                <SwiperSlide key={id}>
+                                    <Post 
+                                        id={id}
+                                        img={imgUrl}
+                                        text={text}
+                                        title={title}
+                                    />
+                                </SwiperSlide>
+                            )
+                        })
                     }
                 </Swiper>
             </div>

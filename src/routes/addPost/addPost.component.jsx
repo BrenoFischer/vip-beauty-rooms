@@ -57,14 +57,19 @@ const AddPost = () => {
     }
 
 
-    const buildItem = (url) => (
-      {
-        id: v4(),
-        imgUrl: url,
-        title: title,
-        text: text,
-      }
-    );  
+    const buildItem = (url) => {
+      const date = new Date();
+
+      return(
+        {
+          id: v4(),
+          imgUrl: url,
+          title: title,
+          text: text,
+          date: date,
+        }
+      );
+    }
   
 
     const addPost = async (event) => {
