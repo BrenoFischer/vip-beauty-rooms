@@ -1,0 +1,65 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+$label-fontSize: 1.2rem;
+
+@mixin shrinkLabel {
+    top: -$label-fontSize;
+    font-size: $label-fontSize;
+    color: $primary-color;
+    font-weight: 500;
+}
+
+
+.form__input-field {
+    position: relative;
+    margin-top: 5rem;
+}
+
+.form__input {
+    background: none;
+    background-color: $white;
+    color: $secondary-color;
+    font-size: 1.4rem;
+    padding: 2.5rem 1rem 1rem .5rem;
+    display: block;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    border-bottom: 2px solid $secondary-color;
+    border-right: 2px solid $secondary-color;
+    margin: 25px 0;
+    resize: none;
+    transition: all .2s;
+
+    &:hover {
+        border-bottom: 2px solid $primary-color;
+        border-right: 2px solid $primary-color;
+    }
+
+    &:focus {
+        border-bottom: 2px solid $primary-color;
+        border-right: 2px solid $primary-color;
+        outline: none;
+    }
+
+    &:focus ~ .form__input-label {
+        @include shrinkLabel();
+    }
+}
+
+.form__input-label {
+    color: $secondary-color;
+    font-size: 1.4rem;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: 300ms ease all;
+
+    &.shrink {
+        @include shrinkLabel();
+    }
+}

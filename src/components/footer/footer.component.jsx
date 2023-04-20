@@ -1,8 +1,14 @@
-import './footer.styles.scss';
+import { useSelector } from 'react-redux';
 
 import InstagramIcon from '@mui/icons-material/Instagram';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import PlaceIcon from '@mui/icons-material/Place';
+
+import LoadingSpinner from '../../components/loadingSpinner/loadingSpinner.component';
+
+import { selectDaysMap } from '../../store/openingHours/openingHours.selector';
+
+import './footer.styles.scss';
 
 const FooterItem = ({ title, icon, anchor=null }) => {
     return(
@@ -22,6 +28,9 @@ const FooterItem = ({ title, icon, anchor=null }) => {
 }
 
 const Footer = () => {
+    const openingHours = useSelector(selectDaysMap);
+    const {saturday, sunday, monday, tuesday, wednesday, thursday, friday} = openingHours;
+
     const iconStyle = {
         color: '#f1997e',
         fontSize: "3rem",
@@ -59,14 +68,19 @@ const Footer = () => {
                 </div>
                 <div className='footer__schedule-container'>
                     <h3 className='footer__schedule-title'>Opening hours</h3>
-                    <ul className='footer__schedule-list'>
-                        <li className='footer__schedule-item'>Monday - 10am to 6pm</li>
-                        <li className='footer__schedule-item'>Tuesday - 10am to 6pm</li>
-                        <li className='footer__schedule-item'>Wednesday - 10am to 6pm</li>
-                        <li className='footer__schedule-item'>Thursday - 10am to 8pm</li>
-                        <li className='footer__schedule-item'>Friday - 10am to 8pm</li>
-                        <li className='footer__schedule-item'>Saturday - 10am to 5pm</li>
-                    </ul>
+                        { Object.keys(openingHours).length !== 0 ?
+                            <ul className='footer__schedule-list'>
+                                <li className='footer__schedule-item'>Monday - {monday.open} to {monday.close}</li>
+                                <li className='footer__schedule-item'>Tuesday - {tuesday.open} to {tuesday.close}</li>
+                                <li className='footer__schedule-item'>Wednesday - {wednesday.open} to {wednesday.close}</li>
+                                <li className='footer__schedule-item'>Thursday - {thursday.open} to {thursday.close}</li>
+                                <li className='footer__schedule-item'>Friday - {friday.open} to {friday.close}</li>
+                                <li className='footer__schedule-item'>Saturday - {saturday.open} to {saturday.close}</li>
+                                <li className='footer__schedule-item'>Sunday - {sunday.open} to {sunday.close}</li>
+                            </ul>
+                        :
+                            <LoadingSpinner alternativeStyle={true} />
+                        }
                 </div>
             </div>
         </footer>

@@ -1,0 +1,22 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.edit-service {
+    &__container {
+        padding: 0 5rem;
+    }
+    
+    &__title-container {
+        text-align: center;
+        margin: 10rem 0;
+    }
+
+    &__title {
+        font-family: 'Allura', sans-serif;
+        font-size: 6rem;
+
+        span {
+            color: $primary-color;
+        }
+    }
+}

@@ -1,13 +1,14 @@
 @import '../../sassStyles/variables';
 @import '../../sassStyles/mixins';
 
-.nav__item {
+.service {
     width: $list-items-width;
     background-color: $light-gray;
     display: flex;
     justify-content: space-between;
     margin: 5rem 0;
     padding-left: 2rem;
+    position: relative;
 
     @include respond(tab-port) {
         width: $list-item-width-medium-phone;
@@ -45,15 +46,15 @@
     &-title-container {
         width: 80%;
         border-bottom: 3px solid $primary-color;
-        margin-bottom: 1.5rem;
         text-align: left;
+        margin-bottom: 2rem;
     }
 
     &-title {
         font-family: 'Montserrat', 'Lato', sans-serif;
         font-weight: 600;
         font-size: $list-items-font-size;
-        line-height: 1rem;
+        line-height: 2.4rem;
         letter-spacing: 0.2rem;
         margin-bottom: 2rem;
     }
@@ -71,11 +72,23 @@
         }
     }
 
+    &-image-container {
+        background-color: $secondary-color;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .prod {
+        height: 100%;
+    }
+
     &-image {
         width: 100%;
         max-width: $img-width;
         object-fit: cover;
         object-position: center;
+        
         cursor: pointer;
 
         @include respond(tab-port) {
@@ -95,6 +108,62 @@
             color: $dark-gray;
             font-size: 1.5rem;
             font-family: 'Montserrat', sans-serif;
+            white-space: pre-line;
         }
+    }
+
+    .actions-container {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        
+        background-color: $secondary-color;
+        color: $primary-color;
+        font-size: 3rem;
+        border-radius: 15px;
+
+        
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .edit-container {
+        color: $primary-color;
+        display: flex;
+    }
+
+    .delete-container {
+        display: flex;
+        margin-left: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+.modal {
+    background-color: $yellowish-white;
+    min-width: 10rem;
+    padding: 3rem;
+    box-shadow: rgba(18, 30, 39, 0.6) 5px 5px;
+    position: fixed;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+    text-align: center;
+    z-index: 999;
+
+    &__title {
+        font-size: 1.6rem;
+    }
+
+    &__buttons-container {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__button-wrapper {
+        margin-right: 2rem;
     }
 }

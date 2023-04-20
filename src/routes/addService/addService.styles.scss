@@ -1,0 +1,21 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.add-service {
+    &__container {
+        padding: 0 5rem;
+    }
+
+    &__description {
+        margin: 10rem 0;
+        text-align: center;
+
+        &-title {
+            display: inline-block;
+            font-family: 'Allura', sans-serif;
+            font-size: 8rem;
+            color: $secondary-color;
+            margin-bottom: 2rem;
+        }
+    }
+}

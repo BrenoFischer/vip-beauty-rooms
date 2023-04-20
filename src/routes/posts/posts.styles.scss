@@ -1,0 +1,84 @@
+@import '../../sassStyles/variables';
+@import '../../sassStyles/mixins';
+
+.posts {
+    margin-top: 5rem;
+
+    &__title-container {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    &__carousel {
+        margin: 0 10rem;
+
+        @include respond(tab-land) {
+            margin: 0;
+        }
+    }
+
+
+    &__title {
+        font-family: 'Allura', sans-serif;
+        font-size: 10rem;
+    }
+
+    &__no-news {
+        text-align: center;
+        margin-bottom: 20rem;
+        margin-top: 10rem;
+
+        &-title {
+            font-family: 'Allura', sans-serif;
+            font-size: 10rem;
+        }
+
+        &-paragraph {
+            font-size: 2rem;
+            line-height: 4rem;
+
+            &--face {
+                color: blue;
+            }
+
+            &--insta {
+                color: red;
+            }
+        }
+    }
+
+}
+
+
+.add-post {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+
+    &:hover .add-post__tooltip {
+        visibility: visible;
+    }
+
+    &__icon {
+        margin-left: 3rem;
+        position: absolute;
+        font-size: 6rem;
+        color: $primary-color;
+    }
+
+    &__tooltip {
+        visibility: hidden;
+        padding: 1rem;
+        min-width: 15rem;
+        position: absolute;
+        left: 10rem;
+        background-color: $yellowish-white;
+        border-radius: 5px;
+        transform: translateY(40%);
+
+        &-text {
+            font-size: 1.5rem;
+            text-align: left;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+.sign-in-page {
+    padding: 0 10rem;
+    margin-bottom: 15rem;
+
+    &__title {
+        text-align: center;
+        margin-top: 10rem;
+        margin-bottom: 4rem;
+        font-size: 10rem;
+        font-family: 'Allura', sans-serif;
+    }
+
+    p {
+        text-align: center;
+        font-size: 1.8rem;
+    }
+
+    .sign-in {
+    
+        &__form {
+            width: 60%;
+            margin: 0 auto;
+        }
+    }
+}
