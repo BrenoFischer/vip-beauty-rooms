@@ -101,7 +101,7 @@ $navPadding: 3rem;
         background-color: $secondary-color;
         padding: 3rem;
 
-        z-index: 10;
+        z-index: 99999;
       }
       
       &__links-container--phone {
