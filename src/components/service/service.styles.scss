@@ -30,12 +30,12 @@
 
         @include respond(tab-port) {
             width: 100%;
-            padding-left: 2rem;
+            margin-left: 2rem;
         }
 
         @include respond(phone) {
             width: 100%;
-            padding-left: 2rem;
+            margin-left: 2rem;
         }
     }
 
@@ -58,6 +58,16 @@
         letter-spacing: 0.2rem;
         margin-bottom: 2rem;
     }
+
+    &-details {
+        @include respond(tab-port) {
+            max-width: calc($list-item-width-medium-phone - 2rem);
+        }
+
+        @include respond(phone) {
+            max-width: calc($list-item-width-small-phone - 2rem);
+        }
+    }   
 
     &-button-container {
         margin-bottom: 2rem;

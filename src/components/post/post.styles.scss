@@ -10,6 +10,10 @@
     padding: 6rem 0;
     position: relative;
 
+    @include respond(tab-land) {
+        min-height: 40rem;
+    }
+
     &__image-container {
         display: flex;
         justify-content: center;
