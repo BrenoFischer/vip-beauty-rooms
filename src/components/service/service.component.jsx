@@ -89,7 +89,7 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
                 <CustomButton buttonText="More details" />
               )
             :
-              (<Link to='details' state={detailsState}>
+              (<Link to='/details' state={detailsState}>
                 <CustomButton buttonText="More details" />
               </Link>)
           }
@@ -102,7 +102,7 @@ function Service({img, id='', title='', shortDetails='', details='', preview=fal
             }
           </div>)
         :
-          (<Link to='details' state={detailsState}>
+          (<Link to='/details' state={detailsState}>
             <div className='service-image-container prod'>
               { img &&
                 <img className='service-image' src={img} alt={title} />
