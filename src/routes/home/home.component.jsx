@@ -1,6 +1,5 @@
 import { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 import Services from '../services/services.component';
 import Footer from '../../components/footer/footer.component';
@@ -26,13 +25,13 @@ function Home() {
   }, [dispatch]);
   
 
-  const scrollToServices = (ref) => {
-    window.scrollTo({
-      top: ref.current.offSetTop,
-      behavior: 'smooth'
-    })
-    servicesRef.current?.scrollIntoView({behavior: 'smooth'});
-  }
+  // const scrollToServices = (ref) => {
+  //   window.scrollTo({
+  //     top: ref.current.offSetTop,
+  //     behavior: 'smooth'
+  //   })
+  //   servicesRef.current?.scrollIntoView({behavior: 'smooth'});
+  // }
 
   return (
     <>

@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useMediaQuery } from 'react-responsive';
 import MediaQuery from 'react-responsive'
 
 import { getPostsAndDocuments } from "../../utils/firebase";

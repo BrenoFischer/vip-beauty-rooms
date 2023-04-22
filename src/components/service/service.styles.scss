@@ -74,11 +74,11 @@
         text-align: left;
 
         @include respond(tab-port) {
-            margin: 2rem 0;
+            padding: 2rem 0;
         }
 
         @include respond(phone) {
-            margin: 2rem 0;
+            padding: 2rem 0;
         }
     }
 
